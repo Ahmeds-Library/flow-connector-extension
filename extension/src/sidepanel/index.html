@@ -3,41 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flow Connector — Studio</title>
+    <title>Flow Connector — AI Filmmaker Studio</title>
     <link rel="stylesheet" href="sidepanel.css" />
   </head>
   <body>
     <div class="app-container">
       
-      <!-- Top Sleek Header (Clean, Restrained, Linear-Style) -->
+      <!-- Top Sleek Header Bar -->
       <header class="app-header">
         <div class="header-left">
-          <div class="brand-mark">FC</div>
+          <div class="brand-avatar-box">
+            <svg class="brand-wave-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12c2.5-4 5.5-4 8 0s5.5 4 8 0 4-2 4-2"/>
+            </svg>
+          </div>
           <div class="brand-titles">
             <span class="brand-name">Flow Connector</span>
-            <span class="brand-version">v1.1</span>
+            <span class="brand-badge">v1.1</span>
           </div>
         </div>
 
         <div class="header-right">
-          <div id="headerStatusBeacon" class="status-indicator-dot online"></div>
+          <div class="beacon-pulse-wrap">
+            <div id="headerStatusBeacon" class="status-indicator-dot online"></div>
+          </div>
           <span id="beaconStatusText" class="status-indicator-text">Live</span>
         </div>
       </header>
 
-      <!-- Segmented Navigation Bar (Clean Pill Tabs) -->
+      <!-- Segmented Navigation Bar with Precision Icons -->
       <nav class="segmented-nav">
-        <button class="seg-nav-btn active" data-tab="create">
+        <button class="seg-nav-btn active" data-tab="create" title="Studio Composer">
+          <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+          </svg>
           <span>Studio</span>
         </button>
-        <button class="seg-nav-btn" data-tab="queue">
+
+        <button class="seg-nav-btn" data-tab="queue" title="Batch Execution Pipeline">
+          <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
           <span>Queue</span>
           <span id="navQueueBadge" class="nav-count-badge" style="display:none;">0</span>
         </button>
-        <button class="seg-nav-btn" data-tab="status">
+
+        <button class="seg-nav-btn" data-tab="status" title="System Diagnostics">
+          <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
           <span>Diagnostics</span>
         </button>
-        <button class="seg-nav-btn" data-tab="agents">
+
+        <button class="seg-nav-btn" data-tab="agents" title="Settings & Agents">
+          <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
           <span>Config</span>
         </button>
       </nav>
@@ -46,32 +69,36 @@
       <main class="main-view-scroller">
 
         <!-- ═════════════════════════════════════════════════════ -->
-        <!-- VIEW 1: STUDIO (CLEAN, FOCUSED, SPACIOUS COMPOSER)    -->
+        <!-- VIEW 1: STUDIO (AESTHETIC, EQUAL SPACING, FOCUSED)   -->
         <!-- ═════════════════════════════════════════════════════ -->
         <section id="view-create" class="view-section active">
           
-          <!-- Compact Flow Connection Status Strip -->
+          <!-- Compact Flow Session Banner -->
           <div id="flowHeroBanner" class="hero-flow-banner connected">
             <div class="hero-flow-details">
-              <span id="flowHeroIcon" class="hero-dot">●</span>
+              <span id="flowHeroIcon" class="hero-live-dot">●</span>
               <div class="hero-text-wrap">
                 <span id="flowHeroTitle" class="hero-title">Google Flow Connected</span>
                 <span id="flowHeroDesc" class="hero-desc">Browser tab active</span>
               </div>
             </div>
-            <button id="btnFlowAction" class="btn-micro-action">
+            <button id="btnFlowAction" class="btn-micro-focus">
               <span>Focus Tab</span>
             </button>
           </div>
 
-          <!-- Studio Panel -->
-          <div class="panel-card">
+          <!-- Studio Composer Panel -->
+          <div class="panel-card main-studio-card">
             
-            <!-- Controls Row: Engine (Image/Video) & Aspect Ratio -->
-            <div class="controls-toolbar">
+            <!-- Controls Bar: Dual Engine Toggle + Aspect Ratios -->
+            <div class="composer-toolbar">
               <div class="mode-switch-box">
-                <button class="mode-btn-pill active" data-mode="image">Image</button>
-                <button class="mode-btn-pill" data-mode="video">Video (Veo)</button>
+                <button class="mode-btn-pill active" data-mode="image">
+                  <span>Image</span>
+                </button>
+                <button class="mode-btn-pill" data-mode="video">
+                  <span>Video (Veo)</span>
+                </button>
               </div>
 
               <div class="aspect-selector-grid">
@@ -82,7 +109,16 @@
               </div>
             </div>
 
-            <!-- Seed Consistency Lock Bar (Clean 1-Line Strip) -->
+            <!-- Prompt Input Container -->
+            <div class="prompt-box-wrap">
+              <textarea id="promptInputField" class="luxury-prompt-box" rows="5" placeholder="Describe camera movement, lighting, subject, and atmosphere..."></textarea>
+              <div class="prompt-bar-footer">
+                <span id="charCounterText" class="meta-caption">0 characters</span>
+                <button id="btnTextClear" class="btn-link-action">Clear</button>
+              </div>
+            </div>
+
+            <!-- Inline Seed Consistency Lock Bar -->
             <div class="seed-control-card">
               <div class="seed-control-header">
                 <label class="seed-toggle-label">
@@ -92,7 +128,7 @@
                 <div id="seedLockInputRow" class="seed-input-row" style="display:none;">
                   <div class="seed-input-box-wrapper">
                     <span class="seed-tag-prefix">#</span>
-                    <input type="number" id="inputSeedVal" class="seed-number-field" placeholder="Seed (e.g. 748291)" min="1" max="2147483647" />
+                    <input type="number" id="inputSeedVal" class="seed-number-field" placeholder="748291" min="1" max="2147483647" />
                   </div>
                   <button id="btnRollSeed" class="btn-seed-action" title="Randomize Seed">Roll</button>
                   <button id="btnApplySeed" class="btn-seed-action" title="Apply to prompt">Apply</button>
@@ -100,17 +136,7 @@
               </div>
             </div>
 
-            <!-- Prompt Input Area -->
-            <div class="prompt-container">
-              <textarea id="promptInputField" class="luxury-prompt-box" rows="5" placeholder="Describe scene, lighting, camera angle, and style..."></textarea>
-            </div>
-
-            <div class="prompt-bar-footer">
-              <span id="charCounterText" class="meta-caption">0 characters</span>
-              <button id="btnTextClear" class="btn-link-action">Clear</button>
-            </div>
-
-            <!-- Quick Template Inspiration Chips (Compact) -->
+            <!-- Curated Idea Chips (Single Line Clean Flow) -->
             <div class="chips-cloud">
               <span class="inspiration-chip-btn" data-prompt="Cinematic macro shot of a luminous crystal lotus blooming in cyberpunk rain, volumetric glow, 8k.">Cyber Lotus</span>
               <span class="inspiration-chip-btn" data-prompt="Epic FPV drone dive soaring down dramatic snowy mountain cliffs at golden hour, hyper-realistic, 4k.">Mountain Drone</span>
@@ -118,13 +144,13 @@
               <span class="inspiration-chip-btn" data-prompt="Cute baby dragon made of glass resting on mossy stone, delicate wisps of golden starlight.">Glass Dragon</span>
             </div>
 
-            <!-- Action Buttons: Generate & Add to Queue -->
+            <!-- Primary Action Buttons Row -->
             <div class="gen-action-dual-row">
               <button id="btnExecuteGen" class="btn-primary-action">
                 <span>Generate Now</span>
-                <span class="key-shortcut">↵</span>
+                <span class="key-shortcut-pill">↵</span>
               </button>
-              <button id="btnEnqueueGen" class="btn-secondary-action" title="Add prompt to batch queue">
+              <button id="btnEnqueueGen" class="btn-secondary-action" title="Queue prompt for continuous batch processing">
                 <span>+ Queue</span>
               </button>
             </div>
@@ -133,7 +159,7 @@
               Paste into Flow for manual review
             </button>
 
-            <!-- Mini Queue Live Indicator on Create View -->
+            <!-- Mini Queue Live Indicator Strip -->
             <div id="miniQueueBanner" class="mini-queue-banner">
               <div class="mini-queue-info">
                 <span id="miniQueueDot" class="mini-queue-pulse"></span>
@@ -147,7 +173,7 @@
         </section>
 
         <!-- ═════════════════════════════════════════════════════ -->
-        <!-- VIEW 2: BATCH QUEUE & JOB TRACKER                     -->
+        <!-- VIEW 2: BATCH QUEUE & JOB PIPELINE                    -->
         <!-- ═════════════════════════════════════════════════════ -->
         <section id="view-queue" class="view-section">
 
@@ -155,7 +181,7 @@
           <div class="panel-card">
             <div class="panel-header-row">
               <div>
-                <h3 class="panel-title">Batch Queue</h3>
+                <h3 class="panel-title">Batch Pipeline</h3>
                 <p class="panel-desc">Real-time job execution & counting</p>
               </div>
               <div id="queueStatePill" class="queue-status-indicator idle">
@@ -200,7 +226,7 @@
           <!-- Queue Job List -->
           <div class="panel-card">
             <div class="panel-header-row">
-              <span class="panel-subtitle">Job Pipeline</span>
+              <span class="panel-subtitle">Job Queue Items</span>
               <span id="queueItemCountTag" class="badge-subtle">0 items</span>
             </div>
 
@@ -212,7 +238,7 @@
         </section>
 
         <!-- ═════════════════════════════════════════════════════ -->
-        <!-- VIEW 3: DIAGNOSTICS & SYSTEM STATUS                   -->
+        <!-- VIEW 3: SYSTEM DIAGNOSTICS & TELEMETRY                -->
         <!-- ═════════════════════════════════════════════════════ -->
         <section id="view-status" class="view-section">
           
@@ -267,7 +293,7 @@
             </p>
 
             <div id="aiSetupActionArea" class="ai-setup-body">
-              <button id="btnQuickCopyAgentPrompt" class="btn-primary-action" style="margin-top:6px;">
+              <button id="btnQuickCopyAgentPrompt" class="btn-primary-action" style="margin-top:6px; height:34px;">
                 <span id="btnCopyPromptLabel">Copy Agent Instructions</span>
               </button>
               <p id="aiAdviceText" class="caption-muted" style="margin-top:6px;">
@@ -287,7 +313,7 @@
               <span class="panel-subtitle">WebSocket Push Telemetry</span>
               <span id="telemetryBadge" class="badge-subtle active">Push Active</span>
             </div>
-            <p class="panel-desc">Instant event notification over WebSocket port 8791 without disk polling.</p>
+            <p class="panel-desc">Sub-50ms instant event notification over WebSocket without disk polling.</p>
             
             <div class="telemetry-event-list" id="telemetryEventList">
               <div class="telemetry-feed-item">
@@ -298,8 +324,8 @@
             </div>
           </div>
 
-          <!-- Legacy queue controls compatibility card -->
-          <div class="panel-card" style="display:none;">
+          <!-- Hidden legacy queue triggers for backward compatibility -->
+          <div style="display:none;">
             <button id="btnJumpToQueueView"></button>
             <button id="btnPauseProcess"></button>
             <button id="btnResumeProcess"></button>
@@ -309,7 +335,7 @@
         </section>
 
         <!-- ═════════════════════════════════════════════════════ -->
-        <!-- VIEW 4: CONFIGURATION & DEVELOPER CREDENTIALS         -->
+        <!-- VIEW 4: CONFIGURATION & PREFERENCES                   -->
         <!-- ═════════════════════════════════════════════════════ -->
         <section id="view-agents" class="view-section">
           
@@ -387,13 +413,13 @@
             </div>
           </div>
 
-          <!-- AI Setup Setup Prompt Card -->
+          <!-- AI Setup Prompt Card -->
           <div class="panel-card">
             <div class="panel-header-row">
               <h4 class="panel-subtitle">Agent Prompt Configuration</h4>
             </div>
             <p class="panel-desc">Configure external AI agents to drive your browser session.</p>
-            <button id="btnCopySetupCode" class="btn-secondary-action" style="margin-top:6px;">
+            <button id="btnCopySetupCode" class="btn-secondary-action" style="margin-top:4px;">
               Copy Setup Prompt
             </button>
           </div>
