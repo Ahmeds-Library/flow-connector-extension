@@ -1,8 +1,8 @@
-# Flow Connector 🌊 v1.0 — AI Filmmaker Studio for Google Flow
+# Flow Connector 🌊 v1.1 — AI Filmmaker Studio for Google Flow
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-1.0.0--pro-06b6d4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://github.com/Ahmeds-Library/flow-connector-extension)
+[![Version](https://img.shields.io/badge/version-1.1.0--pro-06b6d4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://github.com/Ahmeds-Library/flow-connector-extension)
 [![Manifest](https://img.shields.io/badge/Manifest-V3-10b981?style=for-the-badge&logo=w3c&logoColor=white)](extension/manifest.json)
 [![Platform](https://img.shields.io/badge/Platform-Google_Flow_|_Chrome_Extension-3b82f6?style=for-the-badge&logo=google&logoColor=white)](https://flow.google.com)
 [![License](https://img.shields.io/badge/License-Proprietary-8b5cf6?style=for-the-badge)](extension/LICENSE.txt)
@@ -28,10 +28,11 @@ Operating via a glassmorphic Cyberpunk-styled Side Panel and a local WebSocket b
 
 Why developers and digital creators use **Flow Connector** over manual web tabs or cloud API subscriptions:
 
-| Dimension | Standard Google Flow Web UI | Paid Third-Party Video APIs | **Flow Connector v1.0 Pro** |
+| Dimension | Standard Google Flow Web UI | Paid Third-Party Video APIs | **Flow Connector v1.1 Pro** |
 | :--- | :--- | :--- | :--- |
 | **Cost / Fees** | Free (Web quotas) | \$0.10 - \$0.50 per generation | **Zero API Fees** (Uses logged-in web session) |
 | **AI Agent Bridge** | ❌ None | Limited REST SDKs | ✅ **Native WebSocket Bridge (`Port 8791`)** |
+| **Batch Queue & Counting** | ❌ None (No visibility) | Opaque webhook states | ✅ **Dedicated Queue Tab + Live 5-Box Counting Grid** |
 | **Telemetry Speed** | ❌ Manual checking / Polling | Polling Webhooks (1-5s lag) | ✅ **Instant Real-Time WebSocket Push Telemetry** |
 | **Character Consistency** | ❌ Style shifts between shots | Complex LoRA / ControlNet | ✅ **Seed Locking (`--seed <int>`) 50-Shot Precision** |
 | **Safety / Policy Handling** | ❌ Modal stalls queue indefinitely | Error 400 / Job terminated | ✅ **Auto-Dismiss Modal + Auto-Sanitize + Auto-Retry** |
@@ -39,7 +40,7 @@ Why developers and digital creators use **Flow Connector** over manual web tabs 
 | **Aspect Ratio Control** | Manual Dropdowns | JSON parameter payloads | ✅ **1-Click Buttons (`16:9`, `9:16`, `1:1`, `4:3`)** |
 | **DOM Health Check** | ❌ None | ❌ N/A | ✅ **Built-in DOM selector diagnostics** |
 | **Quality Upgrades** | Manual toggle per session | Parameter-dependent | ✅ **Persistent 2K Image & 1080p Video Toggles** |
-| **Batch Queuing** | ❌ Manual one-by-one | Complex Webhooks | ✅ **Pause, Resume, Clear queue controls** |
+| **Batch Queuing** | ❌ Manual one-by-one | Complex Webhooks | ✅ **Pause, Resume, Clear, Cancel, Retry controls** |
 
 ---
 
@@ -52,7 +53,19 @@ Why developers and digital creators use **Flow Connector** over manual web tabs 
 - **Inspiration Cloud**: Pre-engineered high-detail prompts ready to inject with 1-click.
 - **Keyboard Shortcuts**: Press `Ctrl + Enter` (or `Cmd + Enter`) to dispatch immediate generation.
 
-### 2. ⚡ Live Health Diagnostics & Dashboard
+### 2. ⏱️ Batch Queue & Job Tracker with Real-Time Counting (v1.1 New)
+- **Live 5-Box Counting Grid**: Real-time numerical display for:
+  - ⏳ **Waiting**: Exact count of queued jobs waiting in line.
+  - ⚡ **Processing**: Active jobs currently rendering inside Google Flow.
+  - ✅ **Completed**: Successfully finished and downloaded generations.
+  - ❌ **Failed**: Jobs interrupted or rejected with clear reason indicators.
+  - 🔢 **Total Jobs**: Cumulative batch tally.
+- **Dedicated Navigation Tab with Counter Badge**: A dedicated **⏱️ Queue** tab in the segmented navigation displays an amber/cyan glowing badge showing pending jobs count.
+- **Dual Generate & Enqueue Controls**: Use `🚀 Generate Now` for instant generation or `➕ Add to Queue` to stage 5, 10, or 50 shots in sequence.
+- **Detailed Job Cards**: Each queued job features a status pill, mode tag, aspect ratio tag, seed locking indicator, timestamp, collapsible prompt preview, individual cancellation (`🗑️`), and retry (`🔄`) triggers.
+- **Queue Master Controls**: One-click `⏸️ Pause`, `▶️ Resume`, `🗑️ Clear All`, and `🔄 Refresh` buttons.
+
+### 3. ⚡ Live Health Diagnostics & Dashboard
 - **Real-Time Beacons**: Constant polling of Google Flow tab status, Local Bridge daemon, and queue progress.
 - **Automated Tab Navigation**: 1-Click `Open Flow` and `Focus Tab` controls to eliminate manual searching across open windows.
 - **DOM Selector Health Check**: Instant diagnosis of Composer Input, Generate Submit Button, and Media Attachment support.
@@ -222,6 +235,9 @@ Please run a quick status check with 'flow_status' or 'flow-auto status' and let
 
 ### What is Flow Connector?
 **Flow Connector** is a Chrome Extension developed by **Mirza Ahmed Hassan** that automates prompt submission, batch image creation, and Google Veo 3.1 video generation on [flow.google.com](https://flow.google.com) through your active browser session with zero API costs.
+
+### How do I monitor waiting and processing jobs in the Batch Queue?
+Click the **⏱️ Queue** tab in the Side Panel (or click "View Queue →" on the Create tab). The dashboard displays a live 5-box numerical grid detailing exact counts for **⏳ Waiting**, **⚡ Processing**, **✅ Completed**, **❌ Failed**, and **🔢 Total Jobs**. Underneath, each job card exhibits its queue position (e.g. *Waiting #2 in line*), mode, aspect ratio, seed, prompt preview, and individual controls to **Cancel** or **Retry**.
 
 ### How does Seed Locking (`--seed <int>`) keep characters consistent across 50 shots?
 When Seed Locking is enabled, Flow Connector extracts or sets a fixed numeric seed (e.g. `--seed 42890`) and attaches strict consistency constraint anchors (`[SEED: #42890] [CONSISTENCY: strict character model preservation, uniform line weight, identical color palette]`) into the Google Flow DOM composer. This instructs the model to preserve identical facial features, linework, and color schemes across all shots in a scene.

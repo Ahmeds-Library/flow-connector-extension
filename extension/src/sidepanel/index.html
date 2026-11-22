@@ -28,7 +28,7 @@
         <!-- Developer Signature Header Bar -->
         <div class="dev-banner-strip">
           <span class="dev-name-link">⚡ Dev: <strong class="dev-highlight-text">Mirza Ahmed Hassan</strong></span>
-          <span class="version-tag">v1.0 Pro</span>
+          <span class="version-tag">v1.1 Pro</span>
         </div>
       </header>
 
@@ -37,6 +37,11 @@
         <button class="seg-nav-btn active" data-tab="create">
           <span>🎨</span>
           <span>Create</span>
+        </button>
+        <button class="seg-nav-btn" data-tab="queue">
+          <span>⏱️</span>
+          <span>Queue</span>
+          <span id="navQueueBadge" class="nav-count-badge" style="display:none;">0</span>
         </button>
         <button class="seg-nav-btn" data-tab="status">
           <span>⚡</span>
@@ -140,21 +145,112 @@
               <button id="btnTextClear" class="btn-clear-text">Clear Prompt</button>
             </div>
 
-            <!-- Shimmer Primary Generate Button -->
-            <button id="btnExecuteGen" class="btn-shimmer-generate">
-              <span>🚀 Generate in Google Flow</span>
-            </button>
+            <!-- Dual Action Row: Generate Now & Add to Queue -->
+            <div class="gen-action-dual-row">
+              <button id="btnExecuteGen" class="btn-shimmer-generate" style="flex:1.7;">
+                <span>🚀 Generate Now</span>
+              </button>
+              <button id="btnEnqueueGen" class="btn-enqueue-action" style="flex:1;" title="Add prompt to batch queue without immediate blocking">
+                <span>➕ Add to Queue</span>
+              </button>
+            </div>
 
             <!-- Secondary Review Button -->
             <button id="btnPasteReview" class="btn-ghost-action">
               <span>📝 Paste into Flow (Review First)</span>
             </button>
 
+            <!-- Mini Queue Live Indicator on Create View -->
+            <div id="miniQueueBanner" class="mini-queue-banner">
+              <div class="mini-queue-info">
+                <span id="miniQueueDot" class="mini-queue-pulse"></span>
+                <span id="miniQueueText">⏱️ Batch Queue: <strong>Idle</strong> (0 Waiting)</span>
+              </div>
+              <button id="btnGoToQueue" class="mini-queue-link">View Queue →</button>
+            </div>
+
             <!-- Keyboard shortcut hint -->
             <div class="pro-tip-strip">
               <span>⚡ <strong>Tip:</strong> Press <strong>Ctrl + Enter</strong> to generate instantly</span>
             </div>
 
+          </div>
+
+        </section>
+
+        <!-- ═════════════════════════════════════════════════════ -->
+        <!-- VIEW 2: BATCH QUEUE & JOB TRACKER (COUNTING & DETAIL) -->
+        <!-- ═════════════════════════════════════════════════════ -->
+        <section id="view-queue" class="view-section">
+
+          <!-- Queue Summary Metric Card with Live Counters -->
+          <div class="luxury-card">
+            <div class="card-heading-row">
+              <div class="card-title-group">
+                <span class="card-title-icon">⏱️</span>
+                <div>
+                  <h3 class="card-title-text">Batch Queue & Job Tracker</h3>
+                  <p class="card-desc-text">Live job counting, progress & execution management</p>
+                </div>
+              </div>
+              <div id="queueStatePill" class="queue-status-indicator idle">
+                <span class="queue-state-dot"></span>
+                <span id="queueStateLabel">Idle</span>
+              </div>
+            </div>
+
+            <!-- Live 5-Box Counting Grid -->
+            <div class="queue-count-grid">
+              <div class="queue-count-cell highlight-waiting">
+                <span class="queue-count-num" id="qCountWaiting">0</span>
+                <span class="queue-count-label">⏳ Waiting</span>
+              </div>
+              <div class="queue-count-cell highlight-running">
+                <span class="queue-count-num" id="qCountRunning">0</span>
+                <span class="queue-count-label">⚡ Processing</span>
+              </div>
+              <div class="queue-count-cell highlight-done">
+                <span class="queue-count-num" id="qCountDone">0</span>
+                <span class="queue-count-label">✅ Completed</span>
+              </div>
+              <div class="queue-count-cell highlight-failed">
+                <span class="queue-count-num" id="qCountFailed">0</span>
+                <span class="queue-count-label">❌ Failed</span>
+              </div>
+              <div class="queue-count-cell highlight-total">
+                <span class="queue-count-num" id="qCountTotal">0</span>
+                <span class="queue-count-label">🔢 Total Jobs</span>
+              </div>
+            </div>
+
+            <!-- Queue Master Action Toolbar -->
+            <div class="queue-action-bar">
+              <button id="btnQueueTabPause" class="btn-ghost-action" title="Pause generation queue">
+                <span>⏸️ Pause</span>
+              </button>
+              <button id="btnQueueTabResume" class="btn-ghost-action" title="Resume generation queue">
+                <span>▶️ Resume</span>
+              </button>
+              <button id="btnQueueTabClear" class="btn-ghost-action btn-danger" title="Cancel and remove all jobs in queue">
+                <span>🗑️ Clear All</span>
+              </button>
+              <button id="btnQueueTabRefresh" class="btn-ghost-action" title="Refresh queue list">
+                <span>🔄 Refresh</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Queue Items List Container -->
+          <div class="luxury-card">
+            <div class="card-heading-row" style="margin-bottom:8px;">
+              <span class="card-title-text">📋 Queued & Running Jobs</span>
+              <span id="queueItemCountTag" class="badge-subtle">0 items</span>
+            </div>
+
+            <!-- Dynamic List Container Rendered by JS -->
+            <div id="queueItemsList" class="queue-items-container">
+              <!-- Rendered via JavaScript: queue items or empty state -->
+            </div>
           </div>
 
         </section>
@@ -296,6 +392,7 @@
           <div class="luxury-card">
             <div class="card-heading-row">
               <span class="card-title-text">⏱️ Queue Management</span>
+              <button id="btnJumpToQueueView" class="mini-queue-link">Full Queue View →</button>
             </div>
             <p class="card-desc-text">Manage running or queued generation jobs.</p>
             <div style="display:flex; gap:6px;">

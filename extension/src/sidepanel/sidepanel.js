@@ -71,6 +71,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const telemetryBadge = document.getElementById("telemetryBadge");
   const telemetryEventList = document.getElementById("telemetryEventList");
 
+  // ─── Batch Queue & Job Tracker Elements (v1.1) ───────────────
+  const navQueueBadge = document.getElementById("navQueueBadge");
+  const btnEnqueueGen = document.getElementById("btnEnqueueGen");
+  const miniQueueBanner = document.getElementById("miniQueueBanner");
+  const miniQueueDot = document.getElementById("miniQueueDot");
+  const miniQueueText = document.getElementById("miniQueueText");
+  const btnGoToQueue = document.getElementById("btnGoToQueue");
+  const btnJumpToQueueView = document.getElementById("btnJumpToQueueView");
+
+  const queueStatePill = document.getElementById("queueStatePill");
+  const queueStateLabel = document.getElementById("queueStateLabel");
+  const qCountWaiting = document.getElementById("qCountWaiting");
+  const qCountRunning = document.getElementById("qCountRunning");
+  const qCountDone = document.getElementById("qCountDone");
+  const qCountFailed = document.getElementById("qCountFailed");
+  const qCountTotal = document.getElementById("qCountTotal");
+  const queueItemCountTag = document.getElementById("queueItemCountTag");
+  const queueItemsList = document.getElementById("queueItemsList");
+
+  const btnQueueTabPause = document.getElementById("btnQueueTabPause");
+  const btnQueueTabResume = document.getElementById("btnQueueTabResume");
+  const btnQueueTabClear = document.getElementById("btnQueueTabClear");
+  const btnQueueTabRefresh = document.getElementById("btnQueueTabRefresh");
+
   // ─── Local State ─────────────────────────────────────────────
   let activeMode = "image";
   let activeAspect = "16:9";
@@ -203,21 +227,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } catch {}
 
-    // 3. Check Queue Activity
+    // 3. Check Queue Activity & Render Live Queue Dashboard
     try {
       const queueInfo = await chrome.runtime.sendMessage({ t: "queue.get" }).catch(() => null);
-      if (metricQueue) {
-        if (queueInfo?.running) {
-          metricQueue.innerHTML = `<span style="color:var(--accent-cyan)">⚡</span> Generating...`;
-        } else {
-          const queuedCount = (queueInfo?.jobs || []).filter(j => j.status === "queued").length;
-          if (queuedCount > 0) {
-            metricQueue.innerHTML = `<span style="color:var(--status-amber)">●</span> Queued (${queuedCount})`;
-          } else {
-            metricQueue.innerHTML = `<span style="color:var(--status-emerald)">●</span> Idle (Ready)`;
-          }
-        }
-      }
+      renderQueueUI(queueInfo);
     } catch {}
   }
 
@@ -642,11 +655,343 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ─── Queue Controls ─────────────────────────────────────────
+  // ─── Queue Formatting & Tab Switchers ─────────────────────────
+  function formatTimeAgo(ts) {
+    if (!ts) return "Recently";
+    const diff = Math.floor((Date.now() - ts) / 1000);
+    if (diff < 10) return "Just now";
+    if (diff < 60) return `${diff}s ago`;
+    const mins = Math.floor(diff / 60);
+    if (mins < 60) return `${mins}m ago`;
+    const hours = Math.floor(mins / 60);
+    return `${hours}h ago`;
+  }
+
+  function switchToQueueTab() {
+    navBtns.forEach(b => {
+      if (b.getAttribute("data-tab") === "queue") b.classList.add("active");
+      else b.classList.remove("active");
+    });
+    viewSections.forEach(v => {
+      if (v.id === "view-queue") v.classList.add("active");
+      else v.classList.remove("active");
+    });
+  }
+
+  function switchToCreateTab() {
+    navBtns.forEach(b => {
+      if (b.getAttribute("data-tab") === "create") b.classList.add("active");
+      else b.classList.remove("active");
+    });
+    viewSections.forEach(v => {
+      if (v.id === "view-create") v.classList.add("active");
+      else v.classList.remove("active");
+    });
+  }
+
+  if (btnGoToQueue) btnGoToQueue.addEventListener("click", switchToQueueTab);
+  if (btnJumpToQueueView) btnJumpToQueueView.addEventListener("click", switchToQueueTab);
+
+  // ─── Live Queue Dashboard Rendering Engine (v1.1) ─────────────
+  function renderQueueUI(queueInfo) {
+    const jobs = queueInfo?.jobs || [];
+    const isRunning = !!queueInfo?.running;
+    const isPaused = !!queueInfo?.paused;
+
+    const waitingJobs = jobs.filter(j => j.status === "queued" || j.status === "waiting_for_extension");
+    const runningJobs = jobs.filter(j => j.status === "running" || j.status === "downloading");
+    const doneJobs = jobs.filter(j => j.status === "done");
+    const failedJobs = jobs.filter(j => j.status === "failed" || j.status === "cancelled");
+
+    const waitingCount = waitingJobs.length;
+    const runningCount = runningJobs.length;
+    const doneCount = doneJobs.length;
+    const failedCount = failedJobs.length;
+    const totalCount = jobs.length;
+
+    // 1. Navigation Badge (Counting pending jobs)
+    if (navQueueBadge) {
+      const activePending = waitingCount + runningCount;
+      if (activePending > 0) {
+        navQueueBadge.style.display = "inline-flex";
+        navQueueBadge.textContent = activePending;
+        if (waitingCount > 0) {
+          navQueueBadge.className = "nav-count-badge has-waiting";
+        } else {
+          navQueueBadge.className = "nav-count-badge";
+        }
+      } else {
+        navQueueBadge.style.display = "none";
+      }
+    }
+
+    // 2. Mini Queue Banner on Create Tab (Counting visible immediately)
+    if (miniQueueBanner) {
+      if (miniQueueDot && miniQueueText) {
+        if (runningCount > 0) {
+          miniQueueDot.className = "mini-queue-pulse active";
+          miniQueueText.innerHTML = `⏱️ Batch Queue: <strong style="color:var(--accent-cyan)">⚡ Generating</strong> (${waitingCount} Waiting · ${runningCount} Active)`;
+        } else if (waitingCount > 0) {
+          miniQueueDot.className = "mini-queue-pulse waiting";
+          miniQueueText.innerHTML = `⏱️ Batch Queue: <strong style="color:var(--status-amber)">⏳ In Queue</strong> (${waitingCount} Waiting · ${totalCount} Total)`;
+        } else if (isPaused) {
+          miniQueueDot.className = "mini-queue-pulse";
+          miniQueueText.innerHTML = `⏱️ Batch Queue: <strong style="color:var(--status-amber)">⏸️ Paused</strong> (${totalCount} Total)`;
+        } else {
+          miniQueueDot.className = "mini-queue-pulse";
+          miniQueueText.innerHTML = `⏱️ Batch Queue: <strong style="color:var(--status-emerald)">Idle (Ready)</strong> (0 Waiting)`;
+        }
+      }
+    }
+
+    // 3. Status Tab Metric Cell
+    if (metricQueue) {
+      if (runningCount > 0 || isRunning) {
+        metricQueue.innerHTML = `<span style="color:var(--accent-cyan)">⚡</span> Generating (${runningCount} active, ${waitingCount} wait)`;
+      } else if (waitingCount > 0) {
+        metricQueue.innerHTML = `<span style="color:var(--status-amber)">●</span> Queued (${waitingCount} waiting)`;
+      } else if (isPaused) {
+        metricQueue.innerHTML = `<span style="color:var(--status-amber)">⏸️</span> Paused`;
+      } else {
+        metricQueue.innerHTML = `<span style="color:var(--status-emerald)">●</span> Idle (Ready)`;
+      }
+    }
+
+    // 4. Live 5-Box Counting Grid in Queue Tab
+    if (qCountWaiting) qCountWaiting.textContent = waitingCount;
+    if (qCountRunning) qCountRunning.textContent = runningCount;
+    if (qCountDone) qCountDone.textContent = doneCount;
+    if (qCountFailed) qCountFailed.textContent = failedCount;
+    if (qCountTotal) qCountTotal.textContent = totalCount;
+    if (queueItemCountTag) queueItemCountTag.textContent = `${totalCount} item${totalCount === 1 ? "" : "s"}`;
+
+    // 5. State Indicator Pill
+    if (queueStatePill && queueStateLabel) {
+      if (isPaused) {
+        queueStatePill.className = "queue-status-indicator paused";
+        queueStateLabel.textContent = "Paused";
+      } else if (runningCount > 0) {
+        queueStatePill.className = "queue-status-indicator active";
+        queueStateLabel.textContent = `Active (${runningCount})`;
+      } else if (waitingCount > 0) {
+        queueStatePill.className = "queue-status-indicator active";
+        queueStateLabel.textContent = `${waitingCount} Waiting`;
+      } else {
+        queueStatePill.className = "queue-status-indicator idle";
+        queueStateLabel.textContent = "Idle";
+      }
+    }
+
+    // 6. Detailed Queue Item List Rendering
+    if (!queueItemsList) return;
+
+    if (jobs.length === 0) {
+      queueItemsList.innerHTML = `
+        <div class="queue-empty-box">
+          <span class="queue-empty-icon">📂</span>
+          <div class="queue-empty-title">Queue is currently empty</div>
+          <p class="queue-empty-desc">No active or waiting jobs. Type a prompt in "Create" and click "Add to Queue" or dispatch jobs via AI Agent CLI.</p>
+          <button id="btnEmptyGoCreate" class="btn-ghost-action" style="width:auto; padding:7px 16px;">🎨 Go to Create Tab</button>
+        </div>`;
+      const btnEmptyGoCreate = document.getElementById("btnEmptyGoCreate");
+      if (btnEmptyGoCreate) btnEmptyGoCreate.addEventListener("click", switchToCreateTab);
+      return;
+    }
+
+    // Priority Sort: running -> downloading -> queued -> done -> failed -> cancelled
+    const statusPriority = {
+      running: 0,
+      downloading: 1,
+      queued: 2,
+      waiting_for_extension: 3,
+      done: 4,
+      failed: 5,
+      cancelled: 6
+    };
+    const sorted = [...jobs].sort((a, b) => {
+      const pa = statusPriority[a.status] ?? 9;
+      const pb = statusPriority[b.status] ?? 9;
+      if (pa !== pb) return pa - pb;
+      return (b.createdAt || 0) - (a.createdAt || 0);
+    });
+
+    let waitingRank = 1;
+    let html = "";
+
+    sorted.forEach((job, idx) => {
+      const isJobRunning = job.status === "running" || job.status === "downloading";
+      const isJobWaiting = job.status === "queued" || job.status === "waiting_for_extension";
+      const isJobFailed = job.status === "failed" || job.status === "cancelled";
+      const isJobDone = job.status === "done";
+
+      let cardClass = "queue-job-card";
+      if (isJobRunning) cardClass += " is-running";
+      else if (isJobWaiting) cardClass += " is-waiting";
+      else if (isJobFailed) cardClass += " is-failed";
+
+      let posBadge = "";
+      if (isJobRunning) {
+        posBadge = `<span class="job-position-tag running">⚡ Active Processing</span>`;
+      } else if (isJobWaiting) {
+        posBadge = `<span class="job-position-tag waiting">⏳ Waiting #${waitingRank++} in line</span>`;
+      } else {
+        posBadge = `<span class="job-position-tag">#${idx + 1} (${job.id ? job.id.slice(0, 10) : "Job"})</span>`;
+      }
+
+      let statusPill = "";
+      if (job.status === "running") {
+        statusPill = `<span class="job-status-pill running"><span class="pulse-dot"></span> Generating...</span>`;
+      } else if (job.status === "downloading") {
+        statusPill = `<span class="job-status-pill downloading">📥 Downloading</span>`;
+      } else if (job.status === "queued" || job.status === "waiting_for_extension") {
+        statusPill = `<span class="job-status-pill queued">⏳ Waiting</span>`;
+      } else if (job.status === "done") {
+        statusPill = `<span class="job-status-pill done">✅ Completed</span>`;
+      } else if (job.status === "failed") {
+        statusPill = `<span class="job-status-pill failed">❌ Failed</span>`;
+      } else if (job.status === "cancelled") {
+        statusPill = `<span class="job-status-pill cancelled">🚫 Cancelled</span>`;
+      }
+
+      const modeText = (job.params?.mode === "video") ? "🎬 Video (Veo)" : "🖼️ Image";
+      const aspectText = job.params?.aspect ? `📐 ${job.params.aspect}` : "📐 16:9";
+      const seedText = job.params?.seed ? `<span class="job-tag seed">🔒 Seed: ${job.params.seed}</span>` : "";
+      const timeText = `<span class="job-tag">🕒 ${formatTimeAgo(job.createdAt)}</span>`;
+      const promptText = (job.params?.prompt || "No prompt content").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      const errorBox = job.error ? `<div class="job-error-msg">⚠️ ${job.error.replace(/</g, "&lt;")}</div>` : "";
+
+      let actionsHtml = "";
+      if (isJobRunning || isJobWaiting) {
+        actionsHtml = `<button class="btn-job-action cancel" data-cancel-id="${job.id}">🗑️ Cancel</button>`;
+      } else if (isJobFailed || isJobDone) {
+        actionsHtml = `<button class="btn-job-action retry" data-retry-id="${job.id}">🔄 Retry</button>`;
+      }
+
+      html += `
+        <div class="${cardClass}" data-job-id="${job.id}">
+          <div class="job-card-header">
+            <div>${posBadge}</div>
+            <div>${statusPill}</div>
+          </div>
+          <div class="job-tags-row">
+            <span class="job-tag">${modeText}</span>
+            <span class="job-tag">${aspectText}</span>
+            ${seedText}
+            ${timeText}
+          </div>
+          <div class="job-prompt-preview" title="${promptText}">${promptText}</div>
+          ${errorBox}
+          <div class="job-card-actions">
+            ${actionsHtml}
+          </div>
+        </div>`;
+    });
+
+    queueItemsList.innerHTML = html;
+  }
+
+  // ─── Individual Job Action Delegation (Cancel & Retry) ─────────
+  if (queueItemsList) {
+    queueItemsList.addEventListener("click", async e => {
+      const cancelBtn = e.target.closest("[data-cancel-id]");
+      if (cancelBtn) {
+        const jobId = cancelBtn.getAttribute("data-cancel-id");
+        cancelBtn.disabled = true;
+        cancelBtn.textContent = "Cancelling...";
+        await chrome.runtime.sendMessage({ t: "queue.cancelJob", jobId }).catch(() => null);
+        triggerToast(`Job ${jobId.slice(0, 10)} cancelled`);
+        pollSystemStatus();
+        return;
+      }
+
+      const retryBtn = e.target.closest("[data-retry-id]");
+      if (retryBtn) {
+        const jobId = retryBtn.getAttribute("data-retry-id");
+        retryBtn.disabled = true;
+        retryBtn.textContent = "Retrying...";
+        await chrome.runtime.sendMessage({ t: "queue.retryJob", jobId }).catch(() => null);
+        triggerToast(`Job ${jobId.slice(0, 10)} re-queued`);
+        pollSystemStatus();
+        return;
+      }
+    });
+  }
+
+  // ─── Add to Queue Action (From Create View) ───────────────────
+  if (btnEnqueueGen) {
+    btnEnqueueGen.addEventListener("click", async () => {
+      let rawPrompt = (promptInput?.value || "").trim();
+      if (!rawPrompt) {
+        triggerToast("⚠️ Please enter a prompt first", true);
+        if (promptInput) promptInput.focus();
+        return;
+      }
+
+      // Check Seed
+      let seedVal = null;
+      if (switchSeedLock?.checked) {
+        seedVal = parseInt(inputSeedVal?.value, 10);
+        if (isNaN(seedVal) || seedVal <= 0) {
+          seedVal = Math.floor(Math.random() * 899999) + 100000;
+          if (inputSeedVal) inputSeedVal.value = seedVal;
+        }
+      }
+
+      const res = await chrome.runtime.sendMessage({
+        t: "queue.add",
+        prompt: rawPrompt,
+        mode: activeMode,
+        aspect: activeAspect,
+        seed: seedVal
+      }).catch(err => ({ ok: false, error: err.message }));
+
+      if (res?.ok) {
+        triggerToast("✨ Prompt added to batch queue!");
+        if (promptInput) promptInput.value = "";
+        if (charCounterText) charCounterText.textContent = "0 characters";
+        pollSystemStatus();
+      } else {
+        triggerToast("❌ Failed to add to queue: " + (res?.error || "Unknown"), true);
+      }
+    });
+  }
+
+  // ─── Queue Master Toolbar Buttons ─────────────────────────────
+  if (btnQueueTabPause) {
+    btnQueueTabPause.addEventListener("click", async () => {
+      await chrome.runtime.sendMessage({ t: "queue.pause" }).catch(() => null);
+      triggerToast("⏸️ Queue Paused");
+      pollSystemStatus();
+    });
+  }
+
+  if (btnQueueTabResume) {
+    btnQueueTabResume.addEventListener("click", async () => {
+      await chrome.runtime.sendMessage({ t: "queue.resume" }).catch(() => null);
+      triggerToast("▶️ Queue Resumed");
+      pollSystemStatus();
+    });
+  }
+
+  if (btnQueueTabClear) {
+    btnQueueTabClear.addEventListener("click", async () => {
+      const res = await chrome.runtime.sendMessage({ t: "queue.clearAll" }).catch(() => null);
+      triggerToast(`🗑️ Queue cleared (${res?.cleared || 0} removed)`);
+      pollSystemStatus();
+    });
+  }
+
+  if (btnQueueTabRefresh) {
+    btnQueueTabRefresh.addEventListener("click", () => {
+      triggerToast("🔄 Refreshing Queue...");
+      pollSystemStatus();
+    });
+  }
+
   if (btnPauseProcess) {
     btnPauseProcess.addEventListener("click", async () => {
       await chrome.runtime.sendMessage({ t: "queue.pause" }).catch(() => null);
-      triggerToast("Queue Paused");
+      triggerToast("⏸️ Queue Paused");
       pollSystemStatus();
     });
   }
@@ -654,7 +999,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (btnResumeProcess) {
     btnResumeProcess.addEventListener("click", async () => {
       await chrome.runtime.sendMessage({ t: "queue.resume" }).catch(() => null);
-      triggerToast("Queue Resumed");
+      triggerToast("▶️ Queue Resumed");
       pollSystemStatus();
     });
   }
@@ -662,7 +1007,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (btnClearProcess) {
     btnClearProcess.addEventListener("click", async () => {
       const res = await chrome.runtime.sendMessage({ t: "queue.clearAll" }).catch(() => null);
-      triggerToast(`Queue cleared (${res?.cleared || 0} removed)`);
+      triggerToast(`🗑️ Queue cleared (${res?.cleared || 0} removed)`);
       pollSystemStatus();
     });
   }

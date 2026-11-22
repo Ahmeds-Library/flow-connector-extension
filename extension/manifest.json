@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Flow Connector — AI Agent Filmmaker for Google Flow",
   "short_name": "Flow Connector",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Mirza Ahmed Hassan",
   "description": "Drive Google Flow from AI agents (Antigravity, Claude, Cursor) through your logged-in browser session. Developed by Mirza Ahmed Hassan. Zero API fees.",
   "icons": {
