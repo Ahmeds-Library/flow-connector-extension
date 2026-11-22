@@ -3,53 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flow Connector — AI Filmmaker Studio</title>
+    <title>Flow Connector — Studio</title>
     <link rel="stylesheet" href="sidepanel.css" />
   </head>
   <body>
     <div class="app-container">
       
-      <!-- Top Sticky Navigation Bar -->
+      <!-- Top Sleek Header (Clean, Restrained, Linear-Style) -->
       <header class="app-header">
-        <div class="header-row">
-          <div class="brand-combo">
-            <div class="brand-icon-emblem">🌊</div>
-            <div class="brand-meta">
-              <h1>Flow Connector</h1>
-              <p>Google Flow AI Filmmaker</p>
-            </div>
-          </div>
-          <div class="status-pill-live">
-            <div id="headerStatusBeacon" class="beacon-core"></div>
-            <span id="beaconStatusText">Live</span>
+        <div class="header-left">
+          <div class="brand-mark">FC</div>
+          <div class="brand-titles">
+            <span class="brand-name">Flow Connector</span>
+            <span class="brand-version">v1.1</span>
           </div>
         </div>
 
-        <!-- Developer Signature Header Bar -->
-        <div class="dev-banner-strip">
-          <span class="dev-name-link">⚡ Dev: <strong class="dev-highlight-text">Mirza Ahmed Hassan</strong></span>
-          <span class="version-tag">v1.1 Pro</span>
+        <div class="header-right">
+          <div id="headerStatusBeacon" class="status-indicator-dot online"></div>
+          <span id="beaconStatusText" class="status-indicator-text">Live</span>
         </div>
       </header>
 
-      <!-- Segmented Modern Navigation Pills -->
+      <!-- Segmented Navigation Bar (Clean Pill Tabs) -->
       <nav class="segmented-nav">
         <button class="seg-nav-btn active" data-tab="create">
-          <span>🎨</span>
-          <span>Create</span>
+          <span>Studio</span>
         </button>
         <button class="seg-nav-btn" data-tab="queue">
-          <span>⏱️</span>
           <span>Queue</span>
           <span id="navQueueBadge" class="nav-count-badge" style="display:none;">0</span>
         </button>
         <button class="seg-nav-btn" data-tab="status">
-          <span>⚡</span>
-          <span>Status</span>
+          <span>Diagnostics</span>
         </button>
         <button class="seg-nav-btn" data-tab="agents">
-          <span>🤖</span>
-          <span>Agents</span>
+          <span>Config</span>
         </button>
       </nav>
 
@@ -57,121 +46,100 @@
       <main class="main-view-scroller">
 
         <!-- ═════════════════════════════════════════════════════ -->
-        <!-- VIEW 1: CREATE (STUDIO — CLEAN & BEAUTIFUL HOMEPAGE) -->
+        <!-- VIEW 1: STUDIO (CLEAN, FOCUSED, SPACIOUS COMPOSER)    -->
         <!-- ═════════════════════════════════════════════════════ -->
         <section id="view-create" class="view-section active">
           
-          <!-- Dynamic Hero Flow Connection Status Banner -->
+          <!-- Compact Flow Connection Status Strip -->
           <div id="flowHeroBanner" class="hero-flow-banner connected">
             <div class="hero-flow-details">
-              <div id="flowHeroIcon" class="hero-avatar-icon">🟢</div>
-              <div class="hero-text-block">
-                <h3 id="flowHeroTitle">Google Flow Connected</h3>
-                <p id="flowHeroDesc">Active browser tab ready</p>
+              <span id="flowHeroIcon" class="hero-dot">●</span>
+              <div class="hero-text-wrap">
+                <span id="flowHeroTitle" class="hero-title">Google Flow Connected</span>
+                <span id="flowHeroDesc" class="hero-desc">Browser tab active</span>
               </div>
             </div>
-            <button id="btnFlowAction" class="btn-ghost-action" style="width:auto; margin:0; padding:6px 12px;">
-              <span>🌐 Open Flow</span>
+            <button id="btnFlowAction" class="btn-micro-action">
+              <span>Focus Tab</span>
             </button>
           </div>
 
-          <!-- Studio Card -->
-          <div class="luxury-card">
+          <!-- Studio Panel -->
+          <div class="panel-card">
             
-            <!-- Mode Switcher (Image vs Video) -->
-            <div class="mode-switch-box">
-              <button class="mode-btn-pill active" data-mode="image">
-                <span>🖼️ AI Image</span>
-              </button>
-              <button class="mode-btn-pill" data-mode="video">
-                <span>🎬 AI Video (Veo)</span>
-              </button>
+            <!-- Controls Row: Engine (Image/Video) & Aspect Ratio -->
+            <div class="controls-toolbar">
+              <div class="mode-switch-box">
+                <button class="mode-btn-pill active" data-mode="image">Image</button>
+                <button class="mode-btn-pill" data-mode="video">Video (Veo)</button>
+              </div>
+
+              <div class="aspect-selector-grid">
+                <button class="aspect-option-pill active" data-aspect="16:9">16:9</button>
+                <button class="aspect-option-pill" data-aspect="9:16">9:16</button>
+                <button class="aspect-option-pill" data-aspect="1:1">1:1</button>
+                <button class="aspect-option-pill" data-aspect="4:3">4:3</button>
+              </div>
             </div>
 
-            <!-- Aspect Ratio Selector Grid -->
-            <div class="section-subheading">
-              <span>Aspect Ratio / Format</span>
-            </div>
-            <div class="aspect-selector-grid">
-              <button class="aspect-option-pill active" data-aspect="16:9">16:9 Cinema</button>
-              <button class="aspect-option-pill" data-aspect="9:16">9:16 Shorts</button>
-              <button class="aspect-option-pill" data-aspect="1:1">1:1 Square</button>
-              <button class="aspect-option-pill" data-aspect="4:3">4:3 TV</button>
-            </div>
-
-            <!-- Feature 1: Seed Consistency Locking Control -->
+            <!-- Seed Consistency Lock Bar (Clean 1-Line Strip) -->
             <div class="seed-control-card">
               <div class="seed-control-header">
-                <div class="seed-title-wrap">
-                  <span class="seed-emoji-icon">🔒</span>
-                  <div>
-                    <div class="seed-label-text">Seed Consistency Locking <code>--seed</code></div>
-                    <div class="seed-sub-desc">100% consistent character style, line weight & palette across 50 shots</div>
-                  </div>
-                </div>
-                <label class="custom-switch" title="Toggle Seed Locking (--seed <int>)">
+                <label class="seed-toggle-label">
                   <input type="checkbox" id="switchSeedLock" />
-                  <span class="switch-track"></span>
+                  <span class="seed-label-text">Seed Lock</span>
                 </label>
-              </div>
-              <div id="seedLockInputRow" class="seed-input-row" style="display:none;">
-                <div class="seed-input-box-wrapper">
-                  <span class="seed-tag-prefix">--seed</span>
-                  <input type="number" id="inputSeedVal" class="seed-number-field" placeholder="e.g. 748291" min="1" max="2147483647" />
+                <div id="seedLockInputRow" class="seed-input-row" style="display:none;">
+                  <div class="seed-input-box-wrapper">
+                    <span class="seed-tag-prefix">#</span>
+                    <input type="number" id="inputSeedVal" class="seed-number-field" placeholder="Seed (e.g. 748291)" min="1" max="2147483647" />
+                  </div>
+                  <button id="btnRollSeed" class="btn-seed-action" title="Randomize Seed">Roll</button>
+                  <button id="btnApplySeed" class="btn-seed-action" title="Apply to prompt">Apply</button>
                 </div>
-                <button id="btnRollSeed" class="btn-seed-action" title="Generate New Random Seed">🎲 Roll</button>
-                <button id="btnApplySeed" class="btn-seed-action" title="Insert --seed into prompt box">📌 Apply</button>
               </div>
             </div>
 
-            <!-- Quick Inspiration Cloud -->
-            <div class="section-subheading">
-              <span>Quick Inspiration (Click to Try)</span>
-            </div>
-            <div class="chips-cloud">
-              <span class="inspiration-chip-btn" data-prompt="Cinematic macro shot of a luminous crystal lotus blooming in cyberpunk rain, neon cyan volumetric glow, 8k.">🌸 Cyber Lotus</span>
-              <span class="inspiration-chip-btn" data-prompt="Epic FPV drone dive soaring down dramatic snowy mountain cliffs at golden hour, hyper-realistic, 4k.">🏔️ Mountain Drone</span>
-              <span class="inspiration-chip-btn" data-prompt="Futuristic hypercar drifting through rainy midnight Neo-Tokyo street, reflection of neon billboards in puddles, 35mm.">🏎️ Cyber Car</span>
-              <span class="inspiration-chip-btn" data-prompt="Cute baby dragon made of glass resting on mossy stone, breathing delicate wisps of golden starlight.">🐉 Baby Dragon</span>
-            </div>
-
-            <!-- Enhanced Prompt Input Box -->
+            <!-- Prompt Input Area -->
             <div class="prompt-container">
-              <textarea id="promptInputField" class="luxury-prompt-box" placeholder="Describe the scene you want to generate in detail (lighting, camera angle, subject, mood)..."></textarea>
+              <textarea id="promptInputField" class="luxury-prompt-box" rows="5" placeholder="Describe scene, lighting, camera angle, and style..."></textarea>
             </div>
 
             <div class="prompt-bar-footer">
-              <span id="charCounterText">0 characters</span>
-              <button id="btnTextClear" class="btn-clear-text">Clear Prompt</button>
+              <span id="charCounterText" class="meta-caption">0 characters</span>
+              <button id="btnTextClear" class="btn-link-action">Clear</button>
             </div>
 
-            <!-- Dual Action Row: Generate Now & Add to Queue -->
+            <!-- Quick Template Inspiration Chips (Compact) -->
+            <div class="chips-cloud">
+              <span class="inspiration-chip-btn" data-prompt="Cinematic macro shot of a luminous crystal lotus blooming in cyberpunk rain, volumetric glow, 8k.">Cyber Lotus</span>
+              <span class="inspiration-chip-btn" data-prompt="Epic FPV drone dive soaring down dramatic snowy mountain cliffs at golden hour, hyper-realistic, 4k.">Mountain Drone</span>
+              <span class="inspiration-chip-btn" data-prompt="Futuristic hypercar drifting through rainy midnight Neo-Tokyo street, neon reflections, 35mm.">Cyber Car</span>
+              <span class="inspiration-chip-btn" data-prompt="Cute baby dragon made of glass resting on mossy stone, delicate wisps of golden starlight.">Glass Dragon</span>
+            </div>
+
+            <!-- Action Buttons: Generate & Add to Queue -->
             <div class="gen-action-dual-row">
-              <button id="btnExecuteGen" class="btn-shimmer-generate" style="flex:1.7;">
-                <span>🚀 Generate Now</span>
+              <button id="btnExecuteGen" class="btn-primary-action">
+                <span>Generate Now</span>
+                <span class="key-shortcut">↵</span>
               </button>
-              <button id="btnEnqueueGen" class="btn-enqueue-action" style="flex:1;" title="Add prompt to batch queue without immediate blocking">
-                <span>➕ Add to Queue</span>
+              <button id="btnEnqueueGen" class="btn-secondary-action" title="Add prompt to batch queue">
+                <span>+ Queue</span>
               </button>
             </div>
 
-            <!-- Secondary Review Button -->
-            <button id="btnPasteReview" class="btn-ghost-action">
-              <span>📝 Paste into Flow (Review First)</span>
+            <button id="btnPasteReview" class="btn-subtle-link">
+              Paste into Flow for manual review
             </button>
 
             <!-- Mini Queue Live Indicator on Create View -->
             <div id="miniQueueBanner" class="mini-queue-banner">
               <div class="mini-queue-info">
                 <span id="miniQueueDot" class="mini-queue-pulse"></span>
-                <span id="miniQueueText">⏱️ Batch Queue: <strong>Idle</strong> (0 Waiting)</span>
+                <span id="miniQueueText">Queue: <strong>Idle</strong></span>
               </div>
               <button id="btnGoToQueue" class="mini-queue-link">View Queue →</button>
-            </div>
-
-            <!-- Keyboard shortcut hint -->
-            <div class="pro-tip-strip">
-              <span>⚡ <strong>Tip:</strong> Press <strong>Ctrl + Enter</strong> to generate instantly</span>
             </div>
 
           </div>
@@ -179,19 +147,16 @@
         </section>
 
         <!-- ═════════════════════════════════════════════════════ -->
-        <!-- VIEW 2: BATCH QUEUE & JOB TRACKER (COUNTING & DETAIL) -->
+        <!-- VIEW 2: BATCH QUEUE & JOB TRACKER                     -->
         <!-- ═════════════════════════════════════════════════════ -->
         <section id="view-queue" class="view-section">
 
-          <!-- Queue Summary Metric Card with Live Counters -->
-          <div class="luxury-card">
-            <div class="card-heading-row">
-              <div class="card-title-group">
-                <span class="card-title-icon">⏱️</span>
-                <div>
-                  <h3 class="card-title-text">Batch Queue & Job Tracker</h3>
-                  <p class="card-desc-text">Live job counting, progress & execution management</p>
-                </div>
+          <!-- Queue Header & Stat Metrics -->
+          <div class="panel-card">
+            <div class="panel-header-row">
+              <div>
+                <h3 class="panel-title">Batch Queue</h3>
+                <p class="panel-desc">Real-time job execution & counting</p>
               </div>
               <div id="queueStatePill" class="queue-status-indicator idle">
                 <span class="queue-state-dot"></span>
@@ -199,186 +164,131 @@
               </div>
             </div>
 
-            <!-- Live 5-Box Counting Grid -->
+            <!-- 5-Box Clean Metric Grid -->
             <div class="queue-count-grid">
               <div class="queue-count-cell highlight-waiting">
                 <span class="queue-count-num" id="qCountWaiting">0</span>
-                <span class="queue-count-label">⏳ Waiting</span>
+                <span class="queue-count-label">Waiting</span>
               </div>
               <div class="queue-count-cell highlight-running">
                 <span class="queue-count-num" id="qCountRunning">0</span>
-                <span class="queue-count-label">⚡ Processing</span>
+                <span class="queue-count-label">Active</span>
               </div>
               <div class="queue-count-cell highlight-done">
                 <span class="queue-count-num" id="qCountDone">0</span>
-                <span class="queue-count-label">✅ Completed</span>
+                <span class="queue-count-label">Done</span>
               </div>
               <div class="queue-count-cell highlight-failed">
                 <span class="queue-count-num" id="qCountFailed">0</span>
-                <span class="queue-count-label">❌ Failed</span>
+                <span class="queue-count-label">Failed</span>
               </div>
               <div class="queue-count-cell highlight-total">
                 <span class="queue-count-num" id="qCountTotal">0</span>
-                <span class="queue-count-label">🔢 Total Jobs</span>
+                <span class="queue-count-label">Total</span>
               </div>
             </div>
 
-            <!-- Queue Master Action Toolbar -->
+            <!-- Queue Toolbar -->
             <div class="queue-action-bar">
-              <button id="btnQueueTabPause" class="btn-ghost-action" title="Pause generation queue">
-                <span>⏸️ Pause</span>
-              </button>
-              <button id="btnQueueTabResume" class="btn-ghost-action" title="Resume generation queue">
-                <span>▶️ Resume</span>
-              </button>
-              <button id="btnQueueTabClear" class="btn-ghost-action btn-danger" title="Cancel and remove all jobs in queue">
-                <span>🗑️ Clear All</span>
-              </button>
-              <button id="btnQueueTabRefresh" class="btn-ghost-action" title="Refresh queue list">
-                <span>🔄 Refresh</span>
-              </button>
+              <button id="btnQueueTabPause" class="btn-toolbar-action">Pause</button>
+              <button id="btnQueueTabResume" class="btn-toolbar-action">Resume</button>
+              <button id="btnQueueTabClear" class="btn-toolbar-action btn-danger">Clear All</button>
+              <button id="btnQueueTabRefresh" class="btn-toolbar-action">Refresh</button>
             </div>
           </div>
 
-          <!-- Queue Items List Container -->
-          <div class="luxury-card">
-            <div class="card-heading-row" style="margin-bottom:8px;">
-              <span class="card-title-text">📋 Queued & Running Jobs</span>
+          <!-- Queue Job List -->
+          <div class="panel-card">
+            <div class="panel-header-row">
+              <span class="panel-subtitle">Job Pipeline</span>
               <span id="queueItemCountTag" class="badge-subtle">0 items</span>
             </div>
 
-            <!-- Dynamic List Container Rendered by JS -->
             <div id="queueItemsList" class="queue-items-container">
-              <!-- Rendered via JavaScript: queue items or empty state -->
+              <!-- Rendered dynamically by JavaScript -->
             </div>
           </div>
 
         </section>
 
         <!-- ═════════════════════════════════════════════════════ -->
-        <!-- VIEW 2: STATUS & REAL-TIME DASHBOARD                 -->
+        <!-- VIEW 3: DIAGNOSTICS & SYSTEM STATUS                   -->
         <!-- ═════════════════════════════════════════════════════ -->
         <section id="view-status" class="view-section">
           
-          <!-- 4-Stat Metric Grid -->
-          <div class="metrics-quad-grid">
-            <div class="metric-cell">
-              <span class="metric-cell-label">Google Flow</span>
-              <div id="metricFlowTab" class="metric-cell-val">Checking...</div>
+          <!-- System Status Grid -->
+          <div class="panel-card">
+            <div class="panel-header-row">
+              <span class="panel-title">System Status</span>
+              <span class="badge-subtle">Port 8791</span>
             </div>
-            <div class="metric-cell">
-              <span class="metric-cell-label">Bridge Daemon</span>
-              <div id="metricBridge" class="metric-cell-val">Port 8791</div>
+
+            <div class="metrics-quad-grid">
+              <div class="metric-cell">
+                <span class="metric-cell-label">Google Flow</span>
+                <div id="metricFlowTab" class="metric-cell-val">Checking...</div>
+              </div>
+              <div class="metric-cell">
+                <span class="metric-cell-label">Bridge Daemon</span>
+                <div id="metricBridge" class="metric-cell-val">Port 8791</div>
+              </div>
+              <div class="metric-cell">
+                <span class="metric-cell-label">Account Tier</span>
+                <div id="metricTier" class="metric-cell-val" style="color:var(--accent-primary);">Pro Active</div>
+              </div>
+              <div class="metric-cell">
+                <span class="metric-cell-label">Queue</span>
+                <div id="metricQueue" class="metric-cell-val" style="color:var(--status-emerald);">Idle</div>
+              </div>
             </div>
-            <div class="metric-cell">
-              <span class="metric-cell-label">Account Tier</span>
-              <div id="metricTier" class="metric-cell-val" style="color:#a855f7;">⭐ PRO Active</div>
+
+            <div class="action-button-stack">
+              <button id="btnLaunchFlow" class="btn-secondary-action">Open flow.google.com</button>
+              <button id="btnFocusFlowTab" class="btn-toolbar-action">Focus Flow Tab</button>
+              <button id="btnDomDiagnosis" class="btn-toolbar-action">Run DOM Health Check</button>
             </div>
-            <div class="metric-cell">
-              <span class="metric-cell-label">Queue Activity</span>
-              <div id="metricQueue" class="metric-cell-val" style="color:var(--status-emerald);">Idle (Ready)</div>
-            </div>
+
+            <div id="domDiagnosisBox" style="display:none; margin-top:8px; padding:10px; background:#080a11; border-radius:6px; border:1px solid var(--border-subtle); font-size:11px; font-family:var(--font-mono);"></div>
           </div>
 
-          <!-- ═══════════════════════════════════════════════════════ -->
-          <!-- PROACTIVE AI AGENT ONBOARDING & SUGGESTION BANNER     -->
-          <!-- ═══════════════════════════════════════════════════════ -->
-          <div id="aiSetupSmartBanner" class="ai-setup-card disconnected">
-            <div class="ai-setup-header">
-              <div class="ai-setup-icon-box">
-                <span id="aiSetupIcon">🤖</span>
+          <!-- AI Agent Connection Status Box -->
+          <div id="aiSetupSmartBanner" class="panel-card ai-setup-card disconnected">
+            <div class="panel-header-row">
+              <div class="ai-header-group">
+                <span id="aiSetupIcon" class="ai-status-dot">●</span>
+                <h4 id="aiSetupTitle" class="panel-subtitle">AI Agent Bridge</h4>
               </div>
-              <div class="ai-setup-info">
-                <div class="ai-badge-row">
-                  <span id="aiSetupBadge" class="ai-tag-warning">⚠️ AI Agent Not Connected</span>
-                  <span id="aiSetupPulseDot" class="ai-pulse-dot"></span>
-                </div>
-                <h3 id="aiSetupTitle">Connect Your AI Agent</h3>
-                <p id="aiSetupSubtitle">Automate prompts from Claude, Cursor, Antigravity & Windsurf</p>
-              </div>
+              <span id="aiSetupBadge" class="ai-tag-warning">Standby</span>
+              <span id="aiSetupPulseDot" style="display:none;"></span>
             </div>
-
-            <!-- Disconnected State: Proactive Suggestion & 1-Click Copy -->
-            <div id="aiSetupActionArea" class="ai-setup-body">
-              <div class="ai-advice-bubble">
-                <span class="advice-sparkle">💡</span>
-                <span id="aiAdviceText"><strong>Extension Suggestion:</strong> Aap ka AI Agent abhi connect nahi hai. Neeche button se prompt copy karein aur apne AI Agent me paste karein taake automation shuru ho sake!</span>
-              </div>
-
-              <!-- 1-Click Magic Copy Button -->
-              <button id="btnQuickCopyAgentPrompt" class="btn-copy-magic">
-                <span class="magic-icon">📋</span>
-                <span id="btnCopyPromptLabel">Copy Setup Prompt for AI Agent</span>
-              </button>
-
-              <!-- 3-Step Micro Visual Guide -->
-              <div class="ai-steps-list">
-                <div class="ai-step-item">
-                  <span class="step-num">1</span>
-                  <span><strong>Prompt Copy:</strong> Uper wala button dabayein</span>
-                </div>
-                <div class="ai-step-item">
-                  <span class="step-num">2</span>
-                  <span><strong>Paste Karein:</strong> Apne AI Agent (Claude/Cursor/Antigravity) me paste karein</span>
-                </div>
-                <div class="ai-step-item">
-                  <span class="step-num">3</span>
-                  <span><strong>Instant Link:</strong> Extension khud bakhud GREEN ho kar connect ho jae gi</span>
-                </div>
-              </div>
-
-              <!-- Supported Agent Badges -->
-              <div class="ai-agent-badges-row">
-                <span class="agent-chip">⚡ Claude Code</span>
-                <span class="agent-chip">✨ Antigravity</span>
-                <span class="agent-chip">💻 Cursor</span>
-                <span class="agent-chip">🌊 Windsurf</span>
-              </div>
-            </div>
-
-            <!-- Connected State: Celebration & Active Status -->
-            <div id="aiConnectedSuccessArea" class="ai-connected-body" style="display:none;">
-              <div class="ai-success-strip">
-                <span class="success-icon">🎉</span>
-                <div class="success-meta">
-                  <strong>AI Agent Live & Connected!</strong>
-                  <span>Daemon active on Port 8791 • Ready for automated Filmmaking</span>
-                </div>
-              </div>
-              <button id="btnRecopyPrompt" class="btn-ghost-mini">📋 Re-copy Setup Prompt</button>
-            </div>
-          </div>
-
-          <!-- Flow Tab Quick Switch & Controls -->
-          <div class="luxury-card">
-            <div class="card-heading-row">
-              <span class="card-title-text">🌐 Google Flow Session</span>
-            </div>
-            <p class="card-desc-text">Keep Google Flow open in a visible tab to prevent browser throttling.</p>
-            <div style="display:flex; flex-direction:column; gap:6px;">
-              <button id="btnLaunchFlow" class="btn-shimmer-generate" style="height:38px; font-size:12.5px;">
-                <span>🌐 Open flow.google.com</span>
-              </button>
-              <button id="btnFocusFlowTab" class="btn-ghost-action">
-                <span>🎯 Switch to Flow Tab</span>
-              </button>
-              <button id="btnDomDiagnosis" class="btn-ghost-action">
-                <span>🩺 Run DOM Health Check</span>
-              </button>
-            </div>
-            <div id="domDiagnosisBox" style="display:none; margin-top:10px; padding:10px; background:#020617; border-radius:8px; border:1px solid var(--border-subtle); font-size:11.5px;"></div>
-          </div>
-
-          <!-- Feature 2: Real-Time WebSocket Push Telemetry Monitor -->
-          <div class="telemetry-push-card">
-            <div class="telemetry-push-header">
-              <div class="telemetry-pulse-dot"></div>
-              <div class="telemetry-header-title">⚡ Real-Time Push Telemetry</div>
-              <span id="telemetryBadge" class="telemetry-badge-active">Push Active</span>
-            </div>
-            <p class="telemetry-card-desc">
-              Instant event push (<code>onImageReady</code>, <code>onJobFailed</code>) over WebSocket Port 8791 — zero disk/file polling latency.
+            
+            <p id="aiSetupSubtitle" class="panel-desc">
+              Connect Claude Code, Cursor, or Antigravity via local port 8791.
             </p>
+
+            <div id="aiSetupActionArea" class="ai-setup-body">
+              <button id="btnQuickCopyAgentPrompt" class="btn-primary-action" style="margin-top:6px;">
+                <span id="btnCopyPromptLabel">Copy Agent Instructions</span>
+              </button>
+              <p id="aiAdviceText" class="caption-muted" style="margin-top:6px;">
+                Paste this into your AI Agent terminal or chat to start automated generation.
+              </p>
+            </div>
+
+            <div id="aiConnectedSuccessArea" class="ai-connected-body" style="display:none;">
+              <span class="success-label">Active • Ready for automated filmmaking</span>
+              <button id="btnRecopyPrompt" class="btn-link-action">Re-copy instructions</button>
+            </div>
+          </div>
+
+          <!-- Push Telemetry Stream Log -->
+          <div class="panel-card">
+            <div class="panel-header-row">
+              <span class="panel-subtitle">WebSocket Push Telemetry</span>
+              <span id="telemetryBadge" class="badge-subtle active">Push Active</span>
+            </div>
+            <p class="panel-desc">Instant event notification over WebSocket port 8791 without disk polling.</p>
+            
             <div class="telemetry-event-list" id="telemetryEventList">
               <div class="telemetry-feed-item">
                 <span class="telemetry-dot">●</span>
@@ -388,129 +298,87 @@
             </div>
           </div>
 
-          <!-- Queue Controls -->
-          <div class="luxury-card">
-            <div class="card-heading-row">
-              <span class="card-title-text">⏱️ Queue Management</span>
-              <button id="btnJumpToQueueView" class="mini-queue-link">Full Queue View →</button>
-            </div>
-            <p class="card-desc-text">Manage running or queued generation jobs.</p>
-            <div style="display:flex; gap:6px;">
-              <button id="btnPauseProcess" class="btn-ghost-action" style="flex:1;">⏸️ Pause</button>
-              <button id="btnResumeProcess" class="btn-ghost-action" style="flex:1;">▶️ Resume</button>
-              <button id="btnClearProcess" class="btn-ghost-action" style="flex:1; color:var(--status-rose);">🗑️ Clear</button>
-            </div>
+          <!-- Legacy queue controls compatibility card -->
+          <div class="panel-card" style="display:none;">
+            <button id="btnJumpToQueueView"></button>
+            <button id="btnPauseProcess"></button>
+            <button id="btnResumeProcess"></button>
+            <button id="btnClearProcess"></button>
           </div>
 
         </section>
 
         <!-- ═════════════════════════════════════════════════════ -->
-        <!-- VIEW 3: AGENTS, PREFERENCES & DEVELOPER              -->
+        <!-- VIEW 4: CONFIGURATION & DEVELOPER CREDENTIALS         -->
         <!-- ═════════════════════════════════════════════════════ -->
         <section id="view-agents" class="view-section">
           
-          <!-- Verified Developer Showcase Card -->
-          <div class="dev-signature-card">
-            <div class="dev-avatar-seal">MAH</div>
-            <div class="dev-title-name">
-              <span>Mirza Ahmed Hassan</span>
-              <span class="check-blue">✓</span>
+          <!-- Quality & Automation Preferences -->
+          <div class="panel-card">
+            <div class="panel-header-row">
+              <h3 class="panel-title">Preferences</h3>
+              <span class="badge-subtle">Engine v1.1</span>
             </div>
-            <div class="dev-role-badge">Lead Developer & AI Architect</div>
-            <p class="dev-narrative">
-              Architect and developer of <strong>Flow Connector</strong>. Designed to bridge real Google Flow browser sessions with AI agents with zero API fees, high-resolution rendering, and total privacy.
-            </p>
-            <div class="dev-trio-metrics">
-              <div>
-                <div class="stat-figure">$0</div>
-                <div class="stat-caption">API Cost</div>
-              </div>
-              <div>
-                <div class="stat-figure">1080p</div>
-                <div class="stat-caption">Veo HD</div>
-              </div>
-              <div>
-                <div class="stat-figure">100%</div>
-                <div class="stat-caption">Private</div>
-              </div>
-            </div>
-          </div>
 
-          <!-- AI Coding Agents Integration Card -->
-          <div class="luxury-card">
-            <div class="card-heading-row">
-              <span class="card-title-text">🤖 Connect Coding Agents</span>
-            </div>
-            <p class="card-desc-text">
-              Automate generations from Claude Code, Cursor, Antigravity, Windsurf & Codex.
-            </p>
-            <button id="btnCopySetupCode" class="btn-shimmer-generate" style="height:38px; font-size:12.5px;">
-              <span>📋 Copy Agent Setup Prompt</span>
-            </button>
-            <p style="font-size:10.5px; color:var(--text-muted); text-align:center; margin-top:6px;">
-              1-Click Copy • Paste into your coding agent's chat or terminal.
-            </p>
-          </div>
-
-          <!-- Quality Preferences Card -->
-          <div class="luxury-card">
-            <div class="card-heading-row">
-              <span class="card-title-text">⚙️ Quality Preferences</span>
-            </div>
             <div class="pref-item-row">
               <div class="pref-label-info">
-                <h4>Download Images in 2K</h4>
-                <p>Auto-upscales images before saving to disk.</p>
+                <h4>2K Image Upscaling</h4>
+                <p>Auto-upscale images before saving to disk</p>
               </div>
               <label class="custom-switch">
                 <input type="checkbox" id="switch2k" checked />
                 <span class="switch-track"></span>
               </label>
             </div>
+
             <div class="pref-item-row">
               <div class="pref-label-info">
-                <h4>Download Videos in 1080p</h4>
-                <p>Renders Veo video in crisp Full HD.</p>
+                <h4>1080p Video (Veo)</h4>
+                <p>Render Veo clips in high definition</p>
               </div>
               <label class="custom-switch">
                 <input type="checkbox" id="switch1080p" checked />
                 <span class="switch-track"></span>
               </label>
             </div>
+
             <div class="pref-item-row">
               <div class="pref-label-info">
-                <h4>New Project Per Run</h4>
-                <p>Isolates generations into fresh project spaces.</p>
+                <h4>Fresh Project per Generation</h4>
+                <p>Isolate generations in separate Google Flow projects</p>
               </div>
               <label class="custom-switch">
                 <input type="checkbox" id="switchNewProject" />
                 <span class="switch-track"></span>
               </label>
             </div>
+
             <div class="pref-item-row">
               <div class="pref-label-info">
-                <h4>🔒 Seed Consistency Lock</h4>
-                <p>Locks <code>--seed</code> across batch shots for identical character fidelity.</p>
+                <h4>Seed Consistency Locking</h4>
+                <p>Persist <code>--seed</code> token across 50-shot batches</p>
               </div>
               <label class="custom-switch">
                 <input type="checkbox" id="switchPrefSeedLock" />
                 <span class="switch-track"></span>
               </label>
             </div>
+
             <div class="pref-item-row">
               <div class="pref-label-info">
-                <h4>🛡️ Policy Auto-Dismiss & Retry</h4>
-                <p>Auto-dismisses safety warnings, auto-sanitizes & retries queue.</p>
+                <h4>Policy Auto-Dismiss & Retry</h4>
+                <p>Dismiss warning modals, auto-sanitize & retry without queue stall</p>
               </div>
               <label class="custom-switch">
                 <input type="checkbox" id="switchPolicyGuard" checked />
                 <span class="switch-track"></span>
               </label>
             </div>
+
             <div class="pref-item-row">
               <div class="pref-label-info">
-                <h4>⚡ Real-Time Push Telemetry</h4>
-                <p>Instant <code>onImageReady</code> WebSocket push (no file polling).</p>
+                <h4>WebSocket Push Telemetry</h4>
+                <p>Sub-50ms <code>onImageReady</code> broadcast</p>
               </div>
               <label class="custom-switch">
                 <input type="checkbox" id="switchPushTelemetry" checked />
@@ -519,17 +387,40 @@
             </div>
           </div>
 
+          <!-- AI Setup Setup Prompt Card -->
+          <div class="panel-card">
+            <div class="panel-header-row">
+              <h4 class="panel-subtitle">Agent Prompt Configuration</h4>
+            </div>
+            <p class="panel-desc">Configure external AI agents to drive your browser session.</p>
+            <button id="btnCopySetupCode" class="btn-secondary-action" style="margin-top:6px;">
+              Copy Setup Prompt
+            </button>
+          </div>
+
+          <!-- Clean Developer Signature Strip -->
+          <div class="dev-minimal-card">
+            <div class="dev-minimal-header">
+              <span class="dev-author-tag">Lead Architect</span>
+              <strong class="dev-author-name">Mirza Ahmed Hassan</strong>
+            </div>
+            <p class="dev-author-desc">
+              Flow Connector connects Google Flow sessions directly with AI coding agents. Zero API fees • High-resolution rendering.
+            </p>
+          </div>
+
         </section>
 
       </main>
 
-      <!-- Bottom Dock Bar -->
+      <!-- Minimalist Bottom Status Dock -->
       <footer class="bottom-dock">
-        <span>Developed by <strong>Mirza Ahmed Hassan</strong></span>
-        <span>Flow Connector v1.0</span>
+        <span>Mirza Ahmed Hassan</span>
+        <span class="dock-sep">•</span>
+        <span>Flow Connector v1.1</span>
       </footer>
 
-      <!-- Floating Notification Pill -->
+      <!-- Floating Notification Toast -->
       <div id="floatingToast" class="floating-toast-pill">Notification</div>
 
     </div>

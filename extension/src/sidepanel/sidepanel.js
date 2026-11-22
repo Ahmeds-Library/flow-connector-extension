@@ -143,10 +143,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update Hero Banner
         if (flowHeroBanner) {
           flowHeroBanner.className = "hero-flow-banner connected";
-          flowHeroIcon.textContent = "🟢";
+          flowHeroIcon.textContent = "●";
           flowHeroTitle.textContent = "Google Flow Connected";
-          flowHeroDesc.textContent = `Active browser tab ready (${flowTabs.length} open)`;
-          btnFlowAction.innerHTML = "<span>🎯 Focus Tab</span>";
+          flowHeroDesc.textContent = `Tab ready (${flowTabs.length} open)`;
+          btnFlowAction.innerHTML = "<span>Focus Tab</span>";
         }
 
         // Update Top Beacon
@@ -164,10 +164,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update Hero Banner
         if (flowHeroBanner) {
           flowHeroBanner.className = "hero-flow-banner disconnected";
-          flowHeroIcon.textContent = "⚠️";
-          flowHeroTitle.textContent = "Google Flow Not Open";
-          flowHeroDesc.textContent = "Click to open flow.google.com";
-          btnFlowAction.innerHTML = "<span>🌐 Open Flow</span>";
+          flowHeroIcon.textContent = "○";
+          flowHeroTitle.textContent = "Google Flow Offline";
+          flowHeroDesc.textContent = "Open flow.google.com";
+          btnFlowAction.innerHTML = "<span>Open Flow</span>";
         }
 
         // Update Top Beacon
@@ -191,36 +191,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (metricBridge) {
         if (isBridgeActive) {
-          metricBridge.innerHTML = `<span style="color:var(--status-emerald)">●</span> Online (8791)`;
+          metricBridge.innerHTML = `<span style="color:var(--status-emerald)">●</span> Online`;
         } else {
           metricBridge.innerHTML = `<span style="color:var(--text-muted)">○</span> Standby`;
         }
       }
 
-      // Proactive AI Setup Suggestion Card Update (Onboarding & UX Feedback)
+      // AI Setup Card Update
       if (aiSetupSmartBanner) {
         if (isBridgeActive) {
-          aiSetupSmartBanner.className = "ai-setup-card connected";
-          if (aiSetupIcon) aiSetupIcon.textContent = "⚡";
+          aiSetupSmartBanner.className = "panel-card ai-setup-card connected";
+          if (aiSetupIcon) aiSetupIcon.textContent = "●";
           if (aiSetupBadge) {
             aiSetupBadge.className = "ai-tag-success";
-            aiSetupBadge.textContent = "✅ AI Agent Connected";
+            aiSetupBadge.textContent = "Connected";
           }
           if (aiSetupPulseDot) aiSetupPulseDot.style.display = "none";
-          if (aiSetupTitle) aiSetupTitle.textContent = "AI Agent Connected & Ready";
+          if (aiSetupTitle) aiSetupTitle.textContent = "AI Agent Connected";
           if (aiSetupSubtitle) aiSetupSubtitle.textContent = "Daemon active on Port 8791 (Claude Code / Cursor / Antigravity)";
           if (aiSetupActionArea) aiSetupActionArea.style.display = "none";
           if (aiConnectedSuccessArea) aiConnectedSuccessArea.style.display = "flex";
         } else {
-          aiSetupSmartBanner.className = "ai-setup-card disconnected";
-          if (aiSetupIcon) aiSetupIcon.textContent = "🤖";
+          aiSetupSmartBanner.className = "panel-card ai-setup-card disconnected";
+          if (aiSetupIcon) aiSetupIcon.textContent = "○";
           if (aiSetupBadge) {
             aiSetupBadge.className = "ai-tag-warning";
-            aiSetupBadge.textContent = "⚠️ AI Agent Not Connected";
+            aiSetupBadge.textContent = "Standby";
           }
-          if (aiSetupPulseDot) aiSetupPulseDot.style.display = "block";
-          if (aiSetupTitle) aiSetupTitle.textContent = "Connect Your AI Agent";
-          if (aiSetupSubtitle) aiSetupSubtitle.textContent = "Extension Suggestion: Copy prompt & paste in your AI Agent";
+          if (aiSetupPulseDot) aiSetupPulseDot.style.display = "none";
+          if (aiSetupTitle) aiSetupTitle.textContent = "AI Agent Bridge";
+          if (aiSetupSubtitle) aiSetupSubtitle.textContent = "Connect Claude Code, Cursor, or Antigravity via Port 8791";
           if (aiSetupActionArea) aiSetupActionArea.style.display = "flex";
           if (aiConnectedSuccessArea) aiConnectedSuccessArea.style.display = "none";
         }
@@ -730,16 +730,16 @@ document.addEventListener("DOMContentLoaded", () => {
       if (miniQueueDot && miniQueueText) {
         if (runningCount > 0) {
           miniQueueDot.className = "mini-queue-pulse active";
-          miniQueueText.innerHTML = `⏱️ Batch Queue: <strong style="color:var(--accent-cyan)">⚡ Generating</strong> (${waitingCount} Waiting · ${runningCount} Active)`;
+          miniQueueText.innerHTML = `Queue: <strong style="color:var(--accent-primary)">Rendering</strong> (${waitingCount} wait · ${runningCount} active)`;
         } else if (waitingCount > 0) {
           miniQueueDot.className = "mini-queue-pulse waiting";
-          miniQueueText.innerHTML = `⏱️ Batch Queue: <strong style="color:var(--status-amber)">⏳ In Queue</strong> (${waitingCount} Waiting · ${totalCount} Total)`;
+          miniQueueText.innerHTML = `Queue: <strong style="color:var(--status-amber)">Queued</strong> (${waitingCount} waiting · ${totalCount} total)`;
         } else if (isPaused) {
           miniQueueDot.className = "mini-queue-pulse";
-          miniQueueText.innerHTML = `⏱️ Batch Queue: <strong style="color:var(--status-amber)">⏸️ Paused</strong> (${totalCount} Total)`;
+          miniQueueText.innerHTML = `Queue: <strong style="color:var(--status-amber)">Paused</strong> (${totalCount} total)`;
         } else {
           miniQueueDot.className = "mini-queue-pulse";
-          miniQueueText.innerHTML = `⏱️ Batch Queue: <strong style="color:var(--status-emerald)">Idle (Ready)</strong> (0 Waiting)`;
+          miniQueueText.innerHTML = `Queue: <strong style="color:var(--status-emerald)">Idle</strong> (0 waiting)`;
         }
       }
     }
@@ -747,13 +747,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Status Tab Metric Cell
     if (metricQueue) {
       if (runningCount > 0 || isRunning) {
-        metricQueue.innerHTML = `<span style="color:var(--accent-cyan)">⚡</span> Generating (${runningCount} active, ${waitingCount} wait)`;
+        metricQueue.innerHTML = `<span style="color:var(--accent-primary)">●</span> Rendering (${runningCount} active, ${waitingCount} wait)`;
       } else if (waitingCount > 0) {
-        metricQueue.innerHTML = `<span style="color:var(--status-amber)">●</span> Queued (${waitingCount} waiting)`;
+        metricQueue.innerHTML = `<span style="color:var(--status-amber)">●</span> Queued (${waitingCount} wait)`;
       } else if (isPaused) {
-        metricQueue.innerHTML = `<span style="color:var(--status-amber)">⏸️</span> Paused`;
+        metricQueue.innerHTML = `<span style="color:var(--status-amber)">●</span> Paused`;
       } else {
-        metricQueue.innerHTML = `<span style="color:var(--status-emerald)">●</span> Idle (Ready)`;
+        metricQueue.innerHTML = `<span style="color:var(--status-emerald)">●</span> Idle`;
       }
     }
 
@@ -788,10 +788,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (jobs.length === 0) {
       queueItemsList.innerHTML = `
         <div class="queue-empty-box">
-          <span class="queue-empty-icon">📂</span>
-          <div class="queue-empty-title">Queue is currently empty</div>
-          <p class="queue-empty-desc">No active or waiting jobs. Type a prompt in "Create" and click "Add to Queue" or dispatch jobs via AI Agent CLI.</p>
-          <button id="btnEmptyGoCreate" class="btn-ghost-action" style="width:auto; padding:7px 16px;">🎨 Go to Create Tab</button>
+          <div class="queue-empty-title">Queue is empty</div>
+          <p class="queue-empty-desc">No active or waiting jobs. Type a prompt in Studio and click "+ Queue" or dispatch via CLI.</p>
+          <button id="btnEmptyGoCreate" class="btn-secondary-action" style="width:auto; padding:5px 14px; font-size:11px;">Go to Studio</button>
         </div>`;
       const btnEmptyGoCreate = document.getElementById("btnEmptyGoCreate");
       if (btnEmptyGoCreate) btnEmptyGoCreate.addEventListener("click", switchToCreateTab);
@@ -831,40 +830,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let posBadge = "";
       if (isJobRunning) {
-        posBadge = `<span class="job-position-tag running">⚡ Active Processing</span>`;
+        posBadge = `<span class="job-position-tag running">Processing</span>`;
       } else if (isJobWaiting) {
-        posBadge = `<span class="job-position-tag waiting">⏳ Waiting #${waitingRank++} in line</span>`;
+        posBadge = `<span class="job-position-tag waiting">Waiting #${waitingRank++}</span>`;
       } else {
-        posBadge = `<span class="job-position-tag">#${idx + 1} (${job.id ? job.id.slice(0, 10) : "Job"})</span>`;
+        posBadge = `<span class="job-position-tag">#${idx + 1}</span>`;
       }
 
       let statusPill = "";
       if (job.status === "running") {
-        statusPill = `<span class="job-status-pill running"><span class="pulse-dot"></span> Generating...</span>`;
+        statusPill = `<span class="job-status-pill running">Rendering</span>`;
       } else if (job.status === "downloading") {
-        statusPill = `<span class="job-status-pill downloading">📥 Downloading</span>`;
+        statusPill = `<span class="job-status-pill downloading">Saving</span>`;
       } else if (job.status === "queued" || job.status === "waiting_for_extension") {
-        statusPill = `<span class="job-status-pill queued">⏳ Waiting</span>`;
+        statusPill = `<span class="job-status-pill queued">Queued</span>`;
       } else if (job.status === "done") {
-        statusPill = `<span class="job-status-pill done">✅ Completed</span>`;
+        statusPill = `<span class="job-status-pill done">Ready</span>`;
       } else if (job.status === "failed") {
-        statusPill = `<span class="job-status-pill failed">❌ Failed</span>`;
+        statusPill = `<span class="job-status-pill failed">Failed</span>`;
       } else if (job.status === "cancelled") {
-        statusPill = `<span class="job-status-pill cancelled">🚫 Cancelled</span>`;
+        statusPill = `<span class="job-status-pill cancelled">Cancelled</span>`;
       }
 
-      const modeText = (job.params?.mode === "video") ? "🎬 Video (Veo)" : "🖼️ Image";
-      const aspectText = job.params?.aspect ? `📐 ${job.params.aspect}` : "📐 16:9";
-      const seedText = job.params?.seed ? `<span class="job-tag seed">🔒 Seed: ${job.params.seed}</span>` : "";
-      const timeText = `<span class="job-tag">🕒 ${formatTimeAgo(job.createdAt)}</span>`;
+      const modeText = (job.params?.mode === "video") ? "Video (Veo)" : "Image";
+      const aspectText = job.params?.aspect ? job.params.aspect : "16:9";
+      const seedText = job.params?.seed ? `<span class="job-tag seed">#${job.params.seed}</span>` : "";
+      const timeText = `<span class="job-tag">${formatTimeAgo(job.createdAt)}</span>`;
       const promptText = (job.params?.prompt || "No prompt content").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      const errorBox = job.error ? `<div class="job-error-msg">⚠️ ${job.error.replace(/</g, "&lt;")}</div>` : "";
+      const errorBox = job.error ? `<div class="job-error-msg">${job.error.replace(/</g, "&lt;")}</div>` : "";
 
       let actionsHtml = "";
       if (isJobRunning || isJobWaiting) {
-        actionsHtml = `<button class="btn-job-action cancel" data-cancel-id="${job.id}">🗑️ Cancel</button>`;
+        actionsHtml = `<button class="btn-job-action cancel" data-cancel-id="${job.id}">Cancel</button>`;
       } else if (isJobFailed || isJobDone) {
-        actionsHtml = `<button class="btn-job-action retry" data-retry-id="${job.id}">🔄 Retry</button>`;
+        actionsHtml = `<button class="btn-job-action retry" data-retry-id="${job.id}">Retry</button>`;
       }
 
       html += `

@@ -20,7 +20,7 @@
 
 **Flow Connector** is an unpacked Google Chrome extension (Manifest V3) created by **Mirza Ahmed Hassan**. It unlocks automated, high-resolution generative media creation inside [Google Flow](https://flow.google.com) without requiring expensive third-party API keys or recurring subscription overhead.
 
-Operating via a glassmorphic Cyberpunk-styled Side Panel and a local WebSocket bridge (`127.0.0.1:8791`), Flow Connector lets humans prompt interactively in browser, while enabling autonomous AI coding agents (**Claude Code**, **Cursor**, **Antigravity**, **OpenAI Codex**, **Windsurf**, and **Gemini**) to orchestrate batch image generation and cinematic video rendering automatically.
+Operating via an ultra-minimalist, Linear & Raycast-inspired dark Side Panel and a local WebSocket bridge (`127.0.0.1:8791`), Flow Connector lets humans prompt interactively in browser, while enabling autonomous AI coding agents (**Claude Code**, **Cursor**, **Antigravity**, **OpenAI Codex**, **Windsurf**, and **Gemini**) to orchestrate batch image generation and cinematic video rendering automatically.
 
 ---
 
@@ -36,7 +36,7 @@ Why developers and digital creators use **Flow Connector** over manual web tabs 
 | **Telemetry Speed** | ❌ Manual checking / Polling | Polling Webhooks (1-5s lag) | ✅ **Instant Real-Time WebSocket Push Telemetry** |
 | **Character Consistency** | ❌ Style shifts between shots | Complex LoRA / ControlNet | ✅ **Seed Locking (`--seed <int>`) 50-Shot Precision** |
 | **Safety / Policy Handling** | ❌ Modal stalls queue indefinitely | Error 400 / Job terminated | ✅ **Auto-Dismiss Modal + Auto-Sanitize + Auto-Retry** |
-| **Side Panel Studio** | ❌ None (Tab-switching required)| ❌ External Dashboard | ✅ **Direct Glassmorphism Chrome Side Panel** |
+| **Side Panel Studio** | ❌ None (Tab-switching required)| ❌ External Dashboard | ✅ **Linear-Grade Minimalist Chrome Side Panel (~360px Native)** |
 | **Aspect Ratio Control** | Manual Dropdowns | JSON parameter payloads | ✅ **1-Click Buttons (`16:9`, `9:16`, `1:1`, `4:3`)** |
 | **DOM Health Check** | ❌ None | ❌ N/A | ✅ **Built-in DOM selector diagnostics** |
 | **Quality Upgrades** | Manual toggle per session | Parameter-dependent | ✅ **Persistent 2K Image & 1080p Video Toggles** |
@@ -46,11 +46,10 @@ Why developers and digital creators use **Flow Connector** over manual web tabs 
 
 ## ✨ Key Features
 
-### 1. 🎨 Cyberpunk Glassmorphism Side Panel
-- **Zero-Friction In-Browser Studio**: Create prompts without switching away from your current workflow.
-- **Dual Engine Toggle**: Seamlessly switch between **🖼️ AI Image** (*Nano Banana Pro / Imagen 3*) and **🎬 AI Video** (*Google Veo 3.1 / Omni Flash*).
-- **Preset Format Grid**: Instant aspect ratio buttons for **16:9 Cinema**, **9:16 Shorts/Reels**, **1:1 Square**, and **4:3 Classic TV**.
-- **Inspiration Cloud**: Pre-engineered high-detail prompts ready to inject with 1-click.
+### 1. 🎛️ Minimalist Linear-Grade Side Panel (~360px Native)
+- **Zero-Friction In-Browser Studio**: Engineered specifically for Chrome's ~360px sidepanel column with compact density tokens and high information throughput.
+- **Dual Engine Toggle**: Seamlessly switch between **AI Image** (*Nano Banana Pro / Imagen 3*) and **AI Video** (*Google Veo 3.1 / Omni Flash*).
+- **Preset Format Grid**: Instant aspect ratio buttons for **16:9**, **9:16**, **1:1**, and **4:3**.
 - **Keyboard Shortcuts**: Press `Ctrl + Enter` (or `Cmd + Enter`) to dispatch immediate generation.
 
 ### 2. ⏱️ Batch Queue & Job Tracker with Real-Time Counting (v1.1 New)
