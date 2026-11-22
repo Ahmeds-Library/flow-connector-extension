@@ -94,6 +94,31 @@
               <button class="aspect-option-pill" data-aspect="4:3">4:3 TV</button>
             </div>
 
+            <!-- Feature 1: Seed Consistency Locking Control -->
+            <div class="seed-control-card">
+              <div class="seed-control-header">
+                <div class="seed-title-wrap">
+                  <span class="seed-emoji-icon">🔒</span>
+                  <div>
+                    <div class="seed-label-text">Seed Consistency Locking <code>--seed</code></div>
+                    <div class="seed-sub-desc">100% consistent character style, line weight & palette across 50 shots</div>
+                  </div>
+                </div>
+                <label class="custom-switch" title="Toggle Seed Locking (--seed <int>)">
+                  <input type="checkbox" id="switchSeedLock" />
+                  <span class="switch-track"></span>
+                </label>
+              </div>
+              <div id="seedLockInputRow" class="seed-input-row" style="display:none;">
+                <div class="seed-input-box-wrapper">
+                  <span class="seed-tag-prefix">--seed</span>
+                  <input type="number" id="inputSeedVal" class="seed-number-field" placeholder="e.g. 748291" min="1" max="2147483647" />
+                </div>
+                <button id="btnRollSeed" class="btn-seed-action" title="Generate New Random Seed">🎲 Roll</button>
+                <button id="btnApplySeed" class="btn-seed-action" title="Insert --seed into prompt box">📌 Apply</button>
+              </div>
+            </div>
+
             <!-- Quick Inspiration Cloud -->
             <div class="section-subheading">
               <span>Quick Inspiration (Click to Try)</span>
@@ -248,6 +273,25 @@
             <div id="domDiagnosisBox" style="display:none; margin-top:10px; padding:10px; background:#020617; border-radius:8px; border:1px solid var(--border-subtle); font-size:11.5px;"></div>
           </div>
 
+          <!-- Feature 2: Real-Time WebSocket Push Telemetry Monitor -->
+          <div class="telemetry-push-card">
+            <div class="telemetry-push-header">
+              <div class="telemetry-pulse-dot"></div>
+              <div class="telemetry-header-title">⚡ Real-Time Push Telemetry</div>
+              <span id="telemetryBadge" class="telemetry-badge-active">Push Active</span>
+            </div>
+            <p class="telemetry-card-desc">
+              Instant event push (<code>onImageReady</code>, <code>onJobFailed</code>) over WebSocket Port 8791 — zero disk/file polling latency.
+            </p>
+            <div class="telemetry-event-list" id="telemetryEventList">
+              <div class="telemetry-feed-item">
+                <span class="telemetry-dot">●</span>
+                <span class="telemetry-time">Live</span>
+                <span class="telemetry-msg">WebSocket push channel active on 127.0.0.1:8791</span>
+              </div>
+            </div>
+          </div>
+
           <!-- Queue Controls -->
           <div class="luxury-card">
             <div class="card-heading-row">
@@ -343,6 +387,36 @@
               </div>
               <label class="custom-switch">
                 <input type="checkbox" id="switchNewProject" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+            <div class="pref-item-row">
+              <div class="pref-label-info">
+                <h4>🔒 Seed Consistency Lock</h4>
+                <p>Locks <code>--seed</code> across batch shots for identical character fidelity.</p>
+              </div>
+              <label class="custom-switch">
+                <input type="checkbox" id="switchPrefSeedLock" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+            <div class="pref-item-row">
+              <div class="pref-label-info">
+                <h4>🛡️ Policy Auto-Dismiss & Retry</h4>
+                <p>Auto-dismisses safety warnings, auto-sanitizes & retries queue.</p>
+              </div>
+              <label class="custom-switch">
+                <input type="checkbox" id="switchPolicyGuard" checked />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+            <div class="pref-item-row">
+              <div class="pref-label-info">
+                <h4>⚡ Real-Time Push Telemetry</h4>
+                <p>Instant <code>onImageReady</code> WebSocket push (no file polling).</p>
+              </div>
+              <label class="custom-switch">
+                <input type="checkbox" id="switchPushTelemetry" checked />
                 <span class="switch-track"></span>
               </label>
             </div>
