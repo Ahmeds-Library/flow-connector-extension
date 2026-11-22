@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flow Connector — AI Filmmaker Studio</title>
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      
+      <!-- Top Sticky Navigation Bar -->
+      <header class="app-header">
+        <div class="header-row">
+          <div class="brand-combo">
+            <div class="brand-icon-emblem">🌊</div>
+            <div class="brand-meta">
+              <h1>Flow Connector</h1>
+              <p>Google Flow AI Filmmaker</p>
+            </div>
+          </div>
+          <div class="status-pill-live">
+            <div id="headerStatusBeacon" class="beacon-core"></div>
+            <span id="beaconStatusText">Live</span>
+          </div>
+        </div>
+
+        <!-- Developer Signature Header Bar -->
+        <div class="dev-banner-strip">
+          <span class="dev-name-link">⚡ Dev: <strong class="dev-highlight-text">Mirza Ahmed Hassan</strong></span>
+          <span class="version-tag">v1.0 Pro</span>
+        </div>
+      </header>
+
+      <!-- Segmented Modern Navigation Pills -->
+      <nav class="segmented-nav">
+        <button class="seg-nav-btn active" data-tab="create">
+          <span>🎨</span>
+          <span>Create</span>
+        </button>
+        <button class="seg-nav-btn" data-tab="status">
+          <span>⚡</span>
+          <span>Status</span>
+        </button>
+        <button class="seg-nav-btn" data-tab="agents">
+          <span>🤖</span>
+          <span>Agents</span>
+        </button>
+      </nav>
+
+      <!-- Main Scrollable Content Area -->
+      <main class="main-view-scroller">
+
+        <!-- ═════════════════════════════════════════════════════ -->
+        <!-- VIEW 1: CREATE (STUDIO — CLEAN & BEAUTIFUL HOMEPAGE) -->
+        <!-- ═════════════════════════════════════════════════════ -->
+        <section id="view-create" class="view-section active">
+          
+          <!-- Dynamic Hero Flow Connection Status Banner -->
+          <div id="flowHeroBanner" class="hero-flow-banner connected">
+            <div class="hero-flow-details">
+              <div id="flowHeroIcon" class="hero-avatar-icon">🟢</div>
+              <div class="hero-text-block">
+                <h3 id="flowHeroTitle">Google Flow Connected</h3>
+                <p id="flowHeroDesc">Active browser tab ready</p>
+              </div>
+            </div>
+            <button id="btnFlowAction" class="btn-ghost-action" style="width:auto; margin:0; padding:6px 12px;">
+              <span>🌐 Open Flow</span>
+            </button>
+          </div>
+
+          <!-- Studio Card -->
+          <div class="luxury-card">
+            
+            <!-- Mode Switcher (Image vs Video) -->
+            <div class="mode-switch-box">
+              <button class="mode-btn-pill active" data-mode="image">
+                <span>🖼️ AI Image</span>
+              </button>
+              <button class="mode-btn-pill" data-mode="video">
+                <span>🎬 AI Video (Veo)</span>
+              </button>
+            </div>
+
+            <!-- Aspect Ratio Selector Grid -->
+            <div class="section-subheading">
+              <span>Aspect Ratio / Format</span>
+            </div>
+            <div class="aspect-selector-grid">
+              <button class="aspect-option-pill active" data-aspect="16:9">16:9 Cinema</button>
+              <button class="aspect-option-pill" data-aspect="9:16">9:16 Shorts</button>
+              <button class="aspect-option-pill" data-aspect="1:1">1:1 Square</button>
+              <button class="aspect-option-pill" data-aspect="4:3">4:3 TV</button>
+            </div>
+
+            <!-- Quick Inspiration Cloud -->
+            <div class="section-subheading">
+              <span>Quick Inspiration (Click to Try)</span>
+            </div>
+            <div class="chips-cloud">
+              <span class="inspiration-chip-btn" data-prompt="Cinematic macro shot of a luminous crystal lotus blooming in cyberpunk rain, neon cyan volumetric glow, 8k.">🌸 Cyber Lotus</span>
+              <span class="inspiration-chip-btn" data-prompt="Epic FPV drone dive soaring down dramatic snowy mountain cliffs at golden hour, hyper-realistic, 4k.">🏔️ Mountain Drone</span>
+              <span class="inspiration-chip-btn" data-prompt="Futuristic hypercar drifting through rainy midnight Neo-Tokyo street, reflection of neon billboards in puddles, 35mm.">🏎️ Cyber Car</span>
+              <span class="inspiration-chip-btn" data-prompt="Cute baby dragon made of glass resting on mossy stone, breathing delicate wisps of golden starlight.">🐉 Baby Dragon</span>
+            </div>
+
+            <!-- Enhanced Prompt Input Box -->
+            <div class="prompt-container">
+              <textarea id="promptInputField" class="luxury-prompt-box" placeholder="Describe the scene you want to generate in detail (lighting, camera angle, subject, mood)..."></textarea>
+            </div>
+
+            <div class="prompt-bar-footer">
+              <span id="charCounterText">0 characters</span>
+              <button id="btnTextClear" class="btn-clear-text">Clear Prompt</button>
+            </div>
+
+            <!-- Shimmer Primary Generate Button -->
+            <button id="btnExecuteGen" class="btn-shimmer-generate">
+              <span>🚀 Generate in Google Flow</span>
+            </button>
+
+            <!-- Secondary Review Button -->
+            <button id="btnPasteReview" class="btn-ghost-action">
+              <span>📝 Paste into Flow (Review First)</span>
+            </button>
+
+            <!-- Keyboard shortcut hint -->
+            <div class="pro-tip-strip">
+              <span>⚡ <strong>Tip:</strong> Press <strong>Ctrl + Enter</strong> to generate instantly</span>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ═════════════════════════════════════════════════════ -->
+        <!-- VIEW 2: STATUS & REAL-TIME DASHBOARD                 -->
+        <!-- ═════════════════════════════════════════════════════ -->
+        <section id="view-status" class="view-section">
+          
+          <!-- 4-Stat Metric Grid -->
+          <div class="metrics-quad-grid">
+            <div class="metric-cell">
+              <span class="metric-cell-label">Google Flow</span>
+              <div id="metricFlowTab" class="metric-cell-val">Checking...</div>
+            </div>
+            <div class="metric-cell">
+              <span class="metric-cell-label">Bridge Daemon</span>
+              <div id="metricBridge" class="metric-cell-val">Port 8791</div>
+            </div>
+            <div class="metric-cell">
+              <span class="metric-cell-label">Account Tier</span>
+              <div id="metricTier" class="metric-cell-val" style="color:#a855f7;">⭐ PRO Active</div>
+            </div>
+            <div class="metric-cell">
+              <span class="metric-cell-label">Queue Activity</span>
+              <div id="metricQueue" class="metric-cell-val" style="color:var(--status-emerald);">Idle (Ready)</div>
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════ -->
+          <!-- PROACTIVE AI AGENT ONBOARDING & SUGGESTION BANNER     -->
+          <!-- ═══════════════════════════════════════════════════════ -->
+          <div id="aiSetupSmartBanner" class="ai-setup-card disconnected">
+            <div class="ai-setup-header">
+              <div class="ai-setup-icon-box">
+                <span id="aiSetupIcon">🤖</span>
+              </div>
+              <div class="ai-setup-info">
+                <div class="ai-badge-row">
+                  <span id="aiSetupBadge" class="ai-tag-warning">⚠️ AI Agent Not Connected</span>
+                  <span id="aiSetupPulseDot" class="ai-pulse-dot"></span>
+                </div>
+                <h3 id="aiSetupTitle">Connect Your AI Agent</h3>
+                <p id="aiSetupSubtitle">Automate prompts from Claude, Cursor, Antigravity & Windsurf</p>
+              </div>
+            </div>
+
+            <!-- Disconnected State: Proactive Suggestion & 1-Click Copy -->
+            <div id="aiSetupActionArea" class="ai-setup-body">
+              <div class="ai-advice-bubble">
+                <span class="advice-sparkle">💡</span>
+                <span id="aiAdviceText"><strong>Extension Suggestion:</strong> Aap ka AI Agent abhi connect nahi hai. Neeche button se prompt copy karein aur apne AI Agent me paste karein taake automation shuru ho sake!</span>
+              </div>
+
+              <!-- 1-Click Magic Copy Button -->
+              <button id="btnQuickCopyAgentPrompt" class="btn-copy-magic">
+                <span class="magic-icon">📋</span>
+                <span id="btnCopyPromptLabel">Copy Setup Prompt for AI Agent</span>
+              </button>
+
+              <!-- 3-Step Micro Visual Guide -->
+              <div class="ai-steps-list">
+                <div class="ai-step-item">
+                  <span class="step-num">1</span>
+                  <span><strong>Prompt Copy:</strong> Uper wala button dabayein</span>
+                </div>
+                <div class="ai-step-item">
+                  <span class="step-num">2</span>
+                  <span><strong>Paste Karein:</strong> Apne AI Agent (Claude/Cursor/Antigravity) me paste karein</span>
+                </div>
+                <div class="ai-step-item">
+                  <span class="step-num">3</span>
+                  <span><strong>Instant Link:</strong> Extension khud bakhud GREEN ho kar connect ho jae gi</span>
+                </div>
+              </div>
+
+              <!-- Supported Agent Badges -->
+              <div class="ai-agent-badges-row">
+                <span class="agent-chip">⚡ Claude Code</span>
+                <span class="agent-chip">✨ Antigravity</span>
+                <span class="agent-chip">💻 Cursor</span>
+                <span class="agent-chip">🌊 Windsurf</span>
+              </div>
+            </div>
+
+            <!-- Connected State: Celebration & Active Status -->
+            <div id="aiConnectedSuccessArea" class="ai-connected-body" style="display:none;">
+              <div class="ai-success-strip">
+                <span class="success-icon">🎉</span>
+                <div class="success-meta">
+                  <strong>AI Agent Live & Connected!</strong>
+                  <span>Daemon active on Port 8791 • Ready for automated Filmmaking</span>
+                </div>
+              </div>
+              <button id="btnRecopyPrompt" class="btn-ghost-mini">📋 Re-copy Setup Prompt</button>
+            </div>
+          </div>
+
+          <!-- Flow Tab Quick Switch & Controls -->
+          <div class="luxury-card">
+            <div class="card-heading-row">
+              <span class="card-title-text">🌐 Google Flow Session</span>
+            </div>
+            <p class="card-desc-text">Keep Google Flow open in a visible tab to prevent browser throttling.</p>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <button id="btnLaunchFlow" class="btn-shimmer-generate" style="height:38px; font-size:12.5px;">
+                <span>🌐 Open flow.google.com</span>
+              </button>
+              <button id="btnFocusFlowTab" class="btn-ghost-action">
+                <span>🎯 Switch to Flow Tab</span>
+              </button>
+              <button id="btnDomDiagnosis" class="btn-ghost-action">
+                <span>🩺 Run DOM Health Check</span>
+              </button>
+            </div>
+            <div id="domDiagnosisBox" style="display:none; margin-top:10px; padding:10px; background:#020617; border-radius:8px; border:1px solid var(--border-subtle); font-size:11.5px;"></div>
+          </div>
+
+          <!-- Queue Controls -->
+          <div class="luxury-card">
+            <div class="card-heading-row">
+              <span class="card-title-text">⏱️ Queue Management</span>
+            </div>
+            <p class="card-desc-text">Manage running or queued generation jobs.</p>
+            <div style="display:flex; gap:6px;">
+              <button id="btnPauseProcess" class="btn-ghost-action" style="flex:1;">⏸️ Pause</button>
+              <button id="btnResumeProcess" class="btn-ghost-action" style="flex:1;">▶️ Resume</button>
+              <button id="btnClearProcess" class="btn-ghost-action" style="flex:1; color:var(--status-rose);">🗑️ Clear</button>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ═════════════════════════════════════════════════════ -->
+        <!-- VIEW 3: AGENTS, PREFERENCES & DEVELOPER              -->
+        <!-- ═════════════════════════════════════════════════════ -->
+        <section id="view-agents" class="view-section">
+          
+          <!-- Verified Developer Showcase Card -->
+          <div class="dev-signature-card">
+            <div class="dev-avatar-seal">MAH</div>
+            <div class="dev-title-name">
+              <span>Mirza Ahmed Hassan</span>
+              <span class="check-blue">✓</span>
+            </div>
+            <div class="dev-role-badge">Lead Developer & AI Architect</div>
+            <p class="dev-narrative">
+              Architect and developer of <strong>Flow Connector</strong>. Designed to bridge real Google Flow browser sessions with AI agents with zero API fees, high-resolution rendering, and total privacy.
+            </p>
+            <div class="dev-trio-metrics">
+              <div>
+                <div class="stat-figure">$0</div>
+                <div class="stat-caption">API Cost</div>
+              </div>
+              <div>
+                <div class="stat-figure">1080p</div>
+                <div class="stat-caption">Veo HD</div>
+              </div>
+              <div>
+                <div class="stat-figure">100%</div>
+                <div class="stat-caption">Private</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Coding Agents Integration Card -->
+          <div class="luxury-card">
+            <div class="card-heading-row">
+              <span class="card-title-text">🤖 Connect Coding Agents</span>
+            </div>
+            <p class="card-desc-text">
+              Automate generations from Claude Code, Cursor, Antigravity, Windsurf & Codex.
+            </p>
+            <button id="btnCopySetupCode" class="btn-shimmer-generate" style="height:38px; font-size:12.5px;">
+              <span>📋 Copy Agent Setup Prompt</span>
+            </button>
+            <p style="font-size:10.5px; color:var(--text-muted); text-align:center; margin-top:6px;">
+              1-Click Copy • Paste into your coding agent's chat or terminal.
+            </p>
+          </div>
+
+          <!-- Quality Preferences Card -->
+          <div class="luxury-card">
+            <div class="card-heading-row">
+              <span class="card-title-text">⚙️ Quality Preferences</span>
+            </div>
+            <div class="pref-item-row">
+              <div class="pref-label-info">
+                <h4>Download Images in 2K</h4>
+                <p>Auto-upscales images before saving to disk.</p>
+              </div>
+              <label class="custom-switch">
+                <input type="checkbox" id="switch2k" checked />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+            <div class="pref-item-row">
+              <div class="pref-label-info">
+                <h4>Download Videos in 1080p</h4>
+                <p>Renders Veo video in crisp Full HD.</p>
+              </div>
+              <label class="custom-switch">
+                <input type="checkbox" id="switch1080p" checked />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+            <div class="pref-item-row">
+              <div class="pref-label-info">
+                <h4>New Project Per Run</h4>
+                <p>Isolates generations into fresh project spaces.</p>
+              </div>
+              <label class="custom-switch">
+                <input type="checkbox" id="switchNewProject" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+
+      <!-- Bottom Dock Bar -->
+      <footer class="bottom-dock">
+        <span>Developed by <strong>Mirza Ahmed Hassan</strong></span>
+        <span>Flow Connector v1.0</span>
+      </footer>
+
+      <!-- Floating Notification Pill -->
+      <div id="floatingToast" class="floating-toast-pill">Notification</div>
+
+    </div>
+
+    <!-- Interactive Controller Script -->
+    <script src="sidepanel.js"></script>
+  </body>
+</html>
