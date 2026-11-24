@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const aiConnectedSuccessArea = document.getElementById("aiConnectedSuccessArea");
   const btnQuickCopyAgentPrompt = document.getElementById("btnQuickCopyAgentPrompt");
   const btnCopyPromptLabel = document.getElementById("btnCopyPromptLabel");
+  const btnQuickCopyPromptAffordance = document.getElementById("btnQuickCopyPromptAffordance");
   const btnRecopyPrompt = document.getElementById("btnRecopyPrompt");
 
   // Status Tab Elements
@@ -55,6 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Agents & Preferences
   const btnCopySetupCode = document.getElementById("btnCopySetupCode");
+  const btnCopySetupCodeLabel = document.getElementById("btnCopySetupCodeLabel");
+  const btnCopySetupCodeAffordance = document.getElementById("btnCopySetupCodeAffordance");
   const switch2k = document.getElementById("switch2k");
   const switch1080p = document.getElementById("switch1080p");
   const switchNewProject = document.getElementById("switchNewProject");
@@ -101,6 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentFlowTab = null;
   let toastTimer = null;
 
+  const mainViewScroller = document.querySelector(".main-view-scroller");
+
   // ─── Tab Switching ───────────────────────────────────────────
   navBtns.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -110,7 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       btn.classList.add("active");
       const targetView = document.getElementById(`view-${target}`);
-      if (targetView) targetView.classList.add("active");
+      if (targetView) {
+        targetView.classList.add("active");
+        if (mainViewScroller) mainViewScroller.scrollTop = 0;
+      }
     });
   });
 
@@ -558,6 +566,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!domDiagnosisBox) return;
       domDiagnosisBox.style.display = "block";
       domDiagnosisBox.innerHTML = "<div style='color:#38bdf8; display:flex; align-items:center; gap:6px;'><span>🔍</span> Checking Google Flow page & DOM elements...</div>";
+      setTimeout(() => {
+        domDiagnosisBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 50);
 
       try {
         const flowTabs = await chrome.tabs.query({ url: "https://flow.google.com/*" });
@@ -676,6 +687,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (v.id === "view-queue") v.classList.add("active");
       else v.classList.remove("active");
     });
+    if (mainViewScroller) mainViewScroller.scrollTop = 0;
   }
 
   function switchToCreateTab() {
@@ -687,6 +699,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (v.id === "view-create") v.classList.add("active");
       else v.classList.remove("active");
     });
+    if (mainViewScroller) mainViewScroller.scrollTop = 0;
   }
 
   if (btnGoToQueue) btnGoToQueue.addEventListener("click", switchToQueueTab);
@@ -1018,12 +1031,16 @@ MCP Server Tools: flow_status, flow_generate, flow_generate_image, flow_generate
 CLI Command: flow-auto (e.g., flow-auto status, flow-auto image --prompt "...", flow-auto video --prompt "...")
 Please run a quick status check with 'flow_status' or 'flow-auto status' and let me know when you are ready to assist with high-resolution cinematic prompts!`;
 
-  function copyPromptWithFeedback(triggerBtn, labelElem, defaultText) {
+  function copyPromptWithFeedback(triggerBtn, labelElem, defaultText, affordanceElem) {
     navigator.clipboard.writeText(agentPromptCode).then(() => {
-      if (labelElem) labelElem.textContent = "✨ Copied! Ab Agent me Paste karein!";
+      if (triggerBtn) triggerBtn.classList.add("copied");
+      if (labelElem) labelElem.textContent = "✨ Copied! Paste into AI Agent!";
+      if (affordanceElem) affordanceElem.textContent = "✓";
       triggerToast("🎉 Prompt Copied! Paste into Claude Code, Cursor or Antigravity!");
       setTimeout(() => {
+        if (triggerBtn) triggerBtn.classList.remove("copied");
         if (labelElem) labelElem.textContent = defaultText;
+        if (affordanceElem) affordanceElem.textContent = "📋";
       }, 3500);
     }).catch(() => {
       triggerToast("⚠️ Failed to copy prompt to clipboard", true);
@@ -1032,19 +1049,90 @@ Please run a quick status check with 'flow_status' or 'flow-auto status' and let
 
   if (btnQuickCopyAgentPrompt) {
     btnQuickCopyAgentPrompt.addEventListener("click", () => {
-      copyPromptWithFeedback(btnQuickCopyAgentPrompt, btnCopyPromptLabel, "Copy Setup Prompt for AI Agent");
+      copyPromptWithFeedback(
+        btnQuickCopyAgentPrompt,
+        btnCopyPromptLabel,
+        "Copy Agent Instructions",
+        btnQuickCopyPromptAffordance
+      );
     });
   }
 
   if (btnRecopyPrompt) {
     btnRecopyPrompt.addEventListener("click", () => {
-      copyPromptWithFeedback(btnRecopyPrompt, null, "");
+      copyPromptWithFeedback(btnRecopyPrompt, null, "Re-copy instructions", null);
     });
   }
 
   if (btnCopySetupCode) {
     btnCopySetupCode.addEventListener("click", () => {
-      copyPromptWithFeedback(btnCopySetupCode, null, "");
+      copyPromptWithFeedback(
+        btnCopySetupCode,
+        btnCopySetupCodeLabel,
+        "Copy Setup Prompt for AI Agent",
+        btnCopySetupCodeAffordance
+      );
+    });
+  }
+
+  // ─── First-Time Setup Onboarding Guide (1-Time Trigger) ────────
+  const onboardingOverlay = document.getElementById("onboardingOverlay");
+  const btnCloseOnboardingX = document.getElementById("btnCloseOnboardingX");
+  const btnCompleteOnboarding = document.getElementById("btnCompleteOnboarding");
+  const btnOnboardingOpenFlow = document.getElementById("btnOnboardingOpenFlow");
+  const btnOnboardingCopyPrompt = document.getElementById("btnOnboardingCopyPrompt");
+  const btnOnboardingCopyPromptLabel = document.getElementById("btnOnboardingCopyPromptLabel");
+  const btnOnboardingCopyPromptAffordance = document.getElementById("btnOnboardingCopyPromptAffordance");
+  const btnOpenSetupGuide = document.getElementById("btnOpenSetupGuide");
+
+  function openOnboardingModal() {
+    if (onboardingOverlay) {
+      onboardingOverlay.classList.add("active");
+    }
+  }
+
+  function closeOnboardingModal() {
+    if (onboardingOverlay) {
+      onboardingOverlay.classList.remove("active");
+    }
+    try {
+      chrome.storage?.local?.set({ "fc:hasCompletedOnboardingV11": true });
+    } catch {}
+  }
+
+  // Check 1-time setup condition
+  try {
+    chrome.storage?.local?.get(["fc:hasCompletedOnboardingV11"], (res) => {
+      if (!res || !res["fc:hasCompletedOnboardingV11"]) {
+        setTimeout(() => {
+          openOnboardingModal();
+        }, 500);
+      }
+    });
+  } catch {}
+
+  if (btnCloseOnboardingX) {
+    btnCloseOnboardingX.addEventListener("click", closeOnboardingModal);
+  }
+  if (btnCompleteOnboarding) {
+    btnCompleteOnboarding.addEventListener("click", closeOnboardingModal);
+  }
+  if (btnOpenSetupGuide) {
+    btnOpenSetupGuide.addEventListener("click", openOnboardingModal);
+  }
+  if (btnOnboardingOpenFlow) {
+    btnOnboardingOpenFlow.addEventListener("click", () => {
+      activateFlowTab();
+    });
+  }
+  if (btnOnboardingCopyPrompt) {
+    btnOnboardingCopyPrompt.addEventListener("click", () => {
+      copyPromptWithFeedback(
+        btnOnboardingCopyPrompt,
+        btnOnboardingCopyPromptLabel,
+        "Copy Setup Prompt",
+        btnOnboardingCopyPromptAffordance
+      );
     });
   }
 

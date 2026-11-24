@@ -24,6 +24,13 @@
         </div>
 
         <div class="header-right">
+          <button id="btnOpenSetupGuide" class="btn-help-trigger" title="Quick Setup Guide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </button>
           <div class="beacon-pulse-wrap">
             <div id="headerStatusBeacon" class="status-indicator-dot online"></div>
           </div>
@@ -156,7 +163,7 @@
             </div>
 
             <button id="btnPasteReview" class="btn-subtle-link">
-              Paste into Flow for manual review
+              <span>📝 Paste into Flow composer for manual review</span>
             </button>
 
             <!-- Mini Queue Live Indicator Strip -->
@@ -269,12 +276,39 @@
             </div>
 
             <div class="action-button-stack">
-              <button id="btnLaunchFlow" class="btn-secondary-action">Open flow.google.com</button>
-              <button id="btnFocusFlowTab" class="btn-toolbar-action">Focus Flow Tab</button>
-              <button id="btnDomDiagnosis" class="btn-toolbar-action">Run DOM Health Check</button>
+              <button id="btnLaunchFlow" class="btn-stack-action highlight">
+                <svg class="btn-stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+                <span class="btn-stack-text">Open flow.google.com</span>
+                <span class="btn-stack-affordance">↗</span>
+              </button>
+
+              <button id="btnFocusFlowTab" class="btn-stack-action">
+                <svg class="btn-stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="3"/>
+                  <line x1="12" y1="2" x2="12" y2="5"/>
+                  <line x1="12" y1="19" x2="12" y2="22"/>
+                  <line x1="2" y1="12" x2="5" y2="12"/>
+                  <line x1="19" y1="12" x2="22" y2="12"/>
+                </svg>
+                <span class="btn-stack-text">Focus Flow Tab</span>
+                <span class="btn-stack-affordance">→</span>
+              </button>
+
+              <button id="btnDomDiagnosis" class="btn-stack-action subtle">
+                <svg class="btn-stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+                <span class="btn-stack-text">Run DOM Health Check</span>
+                <span class="btn-stack-affordance">⚡</span>
+              </button>
             </div>
 
-            <div id="domDiagnosisBox" style="display:none; margin-top:8px; padding:10px; background:#080a11; border-radius:6px; border:1px solid var(--border-subtle); font-size:11px; font-family:var(--font-mono);"></div>
+            <div id="domDiagnosisBox" class="dom-diagnosis-box" style="display:none;"></div>
           </div>
 
           <!-- AI Agent Connection Status Box -->
@@ -293,8 +327,13 @@
             </p>
 
             <div id="aiSetupActionArea" class="ai-setup-body">
-              <button id="btnQuickCopyAgentPrompt" class="btn-primary-action" style="margin-top:6px; height:34px;">
-                <span id="btnCopyPromptLabel">Copy Agent Instructions</span>
+              <button id="btnQuickCopyAgentPrompt" class="btn-stack-action highlight" style="margin-top:6px;">
+                <svg class="btn-stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                <span id="btnCopyPromptLabel" class="btn-stack-text">Copy Agent Instructions</span>
+                <span id="btnQuickCopyPromptAffordance" class="btn-stack-affordance">📋</span>
               </button>
               <p id="aiAdviceText" class="caption-muted" style="margin-top:6px;">
                 Paste this into your AI Agent terminal or chat to start automated generation.
@@ -414,13 +453,32 @@
           </div>
 
           <!-- AI Setup Prompt Card -->
-          <div class="panel-card">
+          <div class="panel-card highlight-card">
             <div class="panel-header-row">
-              <h4 class="panel-subtitle">Agent Prompt Configuration</h4>
+              <div class="header-group-row">
+                <svg class="header-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+                <h4 class="panel-subtitle">Agent Prompt Configuration</h4>
+              </div>
+              <span class="subtle-badge">AI Bridge</span>
             </div>
-            <p class="panel-desc">Configure external AI agents to drive your browser session.</p>
-            <button id="btnCopySetupCode" class="btn-secondary-action" style="margin-top:4px;">
-              Copy Setup Prompt
+            <p class="panel-desc">Configure external AI agents (Claude Code, Cursor, Antigravity) to drive your Google Flow browser session.</p>
+            <div class="prompt-suggestion-box">
+              <span class="suggestion-tag">💡 Crucial Step / Recommended</span>
+              <p class="suggestion-desc">Ye setup prompt copy karein aur apne AI Agent ko dein ta k wo CLI daemon aur MCP tools ke sath directly integrate ho sake.</p>
+            </div>
+            <button id="btnCopySetupCode" class="btn-stack-action highlight" style="margin-top:8px;">
+              <svg class="btn-stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span id="btnCopySetupCodeLabel" class="btn-stack-text">Copy Setup Prompt for AI Agent</span>
+              <span id="btnCopySetupCodeAffordance" class="btn-stack-affordance">📋</span>
             </button>
           </div>
 
@@ -445,6 +503,67 @@
         <span class="dock-sep">•</span>
         <span>Flow Connector v1.1</span>
       </footer>
+
+      <!-- First-Time Setup Onboarding Overlay Modal (1-Time Trigger) -->
+      <div id="onboardingOverlay" class="onboarding-overlay" role="dialog" aria-modal="true">
+        <div class="onboarding-modal">
+          <div class="onboarding-header">
+            <div class="onboarding-badge-row">
+              <span class="onboarding-badge">🚀 1-Time Setup Guide</span>
+              <button id="btnCloseOnboardingX" class="btn-icon-dismiss" title="Close Guide">✕</button>
+            </div>
+            <h3 class="onboarding-title">Welcome to Flow Connector</h3>
+            <p class="onboarding-subtitle">Apne Google Flow session ko AI coding agents ke sath connect karne ke liye ye 3 steps follow karein:</p>
+          </div>
+
+          <div class="onboarding-steps">
+            <!-- Step 1 -->
+            <div class="onboarding-step-card">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h5>Open Google Flow</h5>
+                <p>Ensure <code>flow.google.com</code> is open in Chrome and signed into your Google account.</p>
+                <button id="btnOnboardingOpenFlow" class="btn-micro-action">Open flow.google.com ↗</button>
+              </div>
+            </div>
+
+            <!-- Step 2 (Suggested / Copy Prompt) -->
+            <div class="onboarding-step-card recommended">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <div class="step-title-row">
+                  <h5>Copy Agent Setup Prompt</h5>
+                  <span class="step-tag">Crucial</span>
+                </div>
+                <p>Ye instruction copy karein aur apne AI Agent (Claude Code, Cursor, Antigravity) me paste karein:</p>
+                <button id="btnOnboardingCopyPrompt" class="btn-stack-action highlight" style="margin-top:6px;">
+                  <svg class="btn-stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                  <span id="btnOnboardingCopyPromptLabel" class="btn-stack-text">Copy Setup Prompt</span>
+                  <span id="btnOnboardingCopyPromptAffordance" class="btn-stack-affordance">📋</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="onboarding-step-card">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h5>Start Flow CLI Bridge</h5>
+                <p>Run <code>flow-auto status</code> in your terminal. Agent requests automatically handle hongi aur 2K downloads save hon ge.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="onboarding-footer">
+            <button id="btnCompleteOnboarding" class="btn-primary-action onboarding-finish-btn">
+              <span>Got it, Let's Get Started! →</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- Floating Notification Toast -->
       <div id="floatingToast" class="floating-toast-pill">Notification</div>

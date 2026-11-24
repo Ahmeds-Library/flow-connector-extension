@@ -91,6 +91,11 @@ Why developers and digital creators use **Flow Connector** over manual web tabs 
 - **Local Bridge Daemon (`127.0.0.1:8791`)**: Allows external agent runtimes to send generation payloads directly into your live browser session.
 - **CLI & MCP Tool Support**: Integrates with `flow_status`, `flow_generate`, `flow_download`, `flow_assets`, and `flow-auto` commands.
 
+### 7. 🚀 First-Time 1-Time Setup Guide & Command Palette Buttons
+- **Integrated Onboarding Modal**: Features a centered, step-by-step 3-stage guide on first install (persisted via `chrome.storage.local`) that ensures users open Google Flow, copy the AI Agent prompt with 1-click, and start the CLI bridge.
+- **Top Header Quick Guide Access**: A permanent, subtle `?` button in the header allows reviewing setup instructions at any time.
+- **Linear / Raycast Command Palette Aesthetics**: Action buttons feature vector SVG icons, keyboard/action affordances (`↗`, `→`, `⚡`, `⌘C`), haptic spring feedback on press (`scale(0.985)`), and dynamic green/cyan "Copied!" feedback states.
+
 ---
 
 ## 📁 Repository & File Structure
@@ -169,7 +174,7 @@ flowchart TD
     subgraph Client["🖥️ User Environment"]
         Agent["🤖 AI Agents\n(Claude / Cursor / Antigravity)"]
         CLI["💻 CLI Tool\n(flow-auto)"]
-        Panel["🌊 Side Panel UI\n(Mirza Ahmed Hassan v1.0)"]
+        Panel["🌊 Side Panel UI\n(Mirza Ahmed Hassan v1.1)"]
     end
 
     subgraph BridgeDaemon["⚡ Local Bridge Daemon (Port 8791)"]
